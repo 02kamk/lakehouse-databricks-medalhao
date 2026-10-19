@@ -8,7 +8,7 @@
 
 👥 **Integrantes:** Kamily Hilário das Luzes · Kauã Lucas Alves Barbosa
 
-Este README contém as instruções para instalar, configurar, executar e testar o projeto.
+Este README contém as instruções para instalar, configurar e executar o projeto.
 
 ---
 
@@ -18,9 +18,6 @@ Este README contém as instruções para instalar, configurar, executar e testar
 - [Instalação](#instalação)
 - [Configuração do Databricks](#configuração-do-databricks)
 - [Execução](#execução)
-- [Testes](#testes)
-- [Documentação local](#documentação-local)
-- [Publicação da documentação](#publicação-da-documentação)
 - [Problemas comuns](#problemas-comuns)
 
 ---
@@ -153,61 +150,6 @@ Clique em **Run now**. O notebook `00_configurar` não entra no Job.
 
 ---
 
-## Testes
-
-### Verificação local
-
-```bash
-cd ~/projetos/lakehouse-academia
-source .venv/bin/activate
-python scripts/testar_local.py
-```
-
-O comando deve terminar com `PASSOU`.
-
-### Verificação no Databricks
-
-1. Execute o Job completo e confira as cinco tarefas em **Succeeded**.
-2. Abra a saída de `validar` e confira **TODAS AS VALIDACOES PASSARAM**.
-3. Execute novamente sem alterar os arquivos da origem e compare os totais das consultas.
-
-### Verificação do MkDocs
-
-```bash
-python -m mkdocs build --strict
-```
-
-O comando deve terminar com `Documentation built` e código de saída zero.
-
----
-
-## Documentação local
-
-```bash
-cd ~/projetos/lakehouse-academia
-source .venv/bin/activate
-python -m mkdocs serve
-```
-
-Abra http://127.0.0.1:8000 no navegador. Pressione **Ctrl+C** no terminal para encerrar.
-
----
-
-## Publicação da documentação
-
-Com as alterações salvas e enviadas ao repositório:
-
-```bash
-python -m mkdocs build --strict
-python -m mkdocs gh-deploy --strict
-```
-
-No GitHub, configure **Settings → Pages → Deploy from a branch → gh-pages → /(root)**.
-
-Depois da publicação, acesse https://02kamk.github.io/lakehouse-databricks-medalhao/.
-
----
-
 ## Problemas comuns
 
 | Erro | Como resolver |
@@ -219,4 +161,3 @@ Depois da publicação, acesse https://02kamk.github.io/lakehouse-databricks-med
 | Tarefas em `Blocked` | confira se a tarefa anterior terminou com sucesso |
 | Falha na validação | abra a saída da tarefa que falhou e siga o roteiro de testes no MkDocs |
 | Falha de autenticação Git | confira sua autenticação e acesso ao repositório |
-| Site retorna 404 | confira a configuração do Pages e o término da publicação |
