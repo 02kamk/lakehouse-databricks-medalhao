@@ -7,11 +7,12 @@ repo_name: lakehouse-databricks-medalhao
 edit_uri: edit/main/docs/
 
 nav:
-  - Contexto e arquitetura: index.md
-  - Fundamentos do trabalho: conceitos.md
-  - Qualidade e modelo dimensional: modelagem.md
+  - Visão geral: index.md
+  - Cenário e dados: dados.md
+  - Pipeline e orquestração: pipeline.md
+  - Qualidade dos dados: qualidade.md
+  - Modelo dimensional: modelagem.md
   - Validações e resultados: testes.md
-  - Roteiro e perguntas: apresentacao.md
   - Referências: referencias.md
 
 theme:

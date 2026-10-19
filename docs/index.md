@@ -1,52 +1,62 @@
-# Trabalho 3 - Lakehouse da academia
+# Lakehouse da Academia
 
+**Trabalho 3 - Engenharia de Dados (SATC)**  
 **Integrantes:** Kamily Hilário das Luzes · Kauã Lucas Alves Barbosa
 
-Implementação acadêmica para Ubuntu no WSL2 e Databricks Free Edition. Entrega indicada no enunciado: 21/10. Este material foi preparado em 19/10/2026.
+## Objetivo
 
-## Objetivo e rastreabilidade
+Transformar dados operacionais de uma academia em uma base analítica no Databricks,
+com organização em camadas, regras de qualidade, modelo dimensional e execução
+sequencial dos notebooks por um Job.
 
-| Requisito do PDF | Implementação | Evidência a coletar |
-| --- | --- | --- |
-| Extrair todas as tabelas do banco | SQLite com planos, unidades, alunos, checkins e pagamentos; notebook 01 consulta sqlite_master e extrai todas | Manifesto e cinco CSVs |
-| Schema Landing/dados em CSV | Schema landing com volume dados | Catalog Explorer e CSV aberto |
-| Bronze em Delta | Notebook 02, cinco tabelas Delta | DESCRIBE DETAIL e contagens |
-| Data Quality na Silver | Notebook 03, tipos, domínios, PK, FK e quarentena | auditoria_qualidade e rejeições |
-| Modelo dimensional Kimball | Notebook 04, quatro dimensões e duas fatos | Modelo e consultas |
-| Execução sequencial em Job | 01 -> 02 -> 03 -> 04 -> 05 | Execução Succeeded com cinco tarefas |
-| Novo GitHub, README e MkDocs | Pasta independente com configuração e documentação | URL do novo repositório e site |
+A solução responde a duas questões analíticas: **como os recebimentos se distribuem
+por competência** e **como as visitas se distribuem entre as unidades**.
 
-O material de aula citado no PDF não foi fornecido; o código aqui foi desenvolvido com base nos dois repositórios indicados e na documentação oficial. O banco escolhido é SQLite, permitido pelo enunciado, com as mesmas cinco tabelas e gerador do trabalho 2. Não se afirma que a extração parte do SQL Server. Os CSVs gerados inicialmente servem para popular a origem; no Job, novos CSVs são extraídos do banco SQLite real.
+## Escopo
+
+O projeto processa cinco tabelas de um banco SQLite: planos, unidades, alunos,
+checkins e pagamentos. Todas são extraídas para CSV e percorrem as camadas
+Landing, Bronze e Silver. A Gold reúne quatro dimensões e duas tabelas fato.
+
+| Camada | Papel na solução | Saída |
+|---|---|---|
+| Landing | preservar a extração do banco | cinco arquivos CSV e manifesto |
+| Bronze | registrar os dados recebidos em tabelas transacionais | cinco tabelas Delta |
+| Silver | converter tipos e aplicar regras de qualidade | cinco tabelas válidas, quarentenas e auditoria |
+| Gold | organizar os eventos para análise | quatro dimensões e duas fatos |
 
 ## Arquitetura
 
-O Ubuntu prepara a origem com o gerador do trabalho 2. Os CSVs populam o SQLite; um snapshot do banco e seu manifesto são enviados ao volume origem.arquivos.
-
 ```mermaid
 flowchart LR
-    A["Origem: SQLite"] --> B["Landing: CSV"]
-    B --> C["Bronze: Delta Lake"]
-    C --> D["Silver: tipos e qualidade"]
+    A["Academia: SQLite"] --> B["Landing: CSV"]
+    B --> C["Bronze: conteúdo recebido"]
+    C --> D["Silver: dados validados"]
     D --> E["Gold: dimensões e fatos"]
     D --> Q["Quarentena e auditoria"]
-    E --> V["Validações e análises"]
+    E --> F["Receita por competência"]
+    E --> G["Visitas por unidade"]
 ```
 
-## Orquestração
+As camadas separam responsabilidades. A extração permanece disponível para comparação;
+a Bronze conserva o conteúdo recebido; a Silver registra quais dados passaram nas regras;
+a Gold estabelece o grão e as relações usadas nas análises.
 
-```mermaid
-flowchart LR
-    A["extrair: 01"] --> B["bronze: 02"]
-    B --> C["silver: 03"]
-    C --> D["gold: 04"]
-    D --> E["validar: 05"]
-```
+## Continuidade dos trabalhos anteriores
 
-Todas as tarefas usam compute Serverless e o mesmo parâmetro catalogo.
-Cada tarefa prossegue após sucesso da anterior. O notebook 00 prepara o ambiente antes do Job.
+O trabalho 1 explorou Spark, Delta Lake e Iceberg. O trabalho 2 acrescentou extração
+de SQL Server, armazenamento CSV no MinIO e tabelas Delta. O trabalho 3 reutiliza o
+cenário e o gerador de dados do trabalho 2, com SQLite como origem escolhida, e acrescenta
+processamento gerenciado, qualidade, modelagem dimensional e orquestração.
 
-Landing/dados é interpretado como schema landing e volume dados. Um schema registra objetos; um volume armazena arquivos CSV. Caminho: /Volumes/CATALOGO/landing/dados. Não se cria uma tabela Delta na Landing para fingir que ela é CSV.
+## Organização desta documentação
 
-## Estado da entrega
+- [Cenário e dados](dados.md): entidades, relacionamentos e características da base.
+- [Pipeline e orquestração](pipeline.md): o que cada notebook faz e como as etapas se relacionam.
+- [Qualidade dos dados](qualidade.md): conversões, regras, quarentena e auditoria.
+- [Modelo dimensional](modelagem.md): dimensões, fatos, grãos e medidas.
+- [Validações e resultados](testes.md): critérios de consistência, resultados registrados e análises.
+- [Referências](referencias.md): fontes e créditos do projeto.
 
-Os testes locais da origem e sintaxe passaram. Durante a execução guiada, o grupo confirmou upload, execução dos notebooks, zero rejeições na Silver e sucesso do Job completo. Uma captura mostrou as cinco tarefas em sucesso; a reexecução também foi confirmada pelo estudante. A documentação conceitual fica neste site; as instruções de instalação, configuração e execução ficam no README do repositório. Testes locais, execução remota e publicação são verificações distintas.
+As tecnologias, os requisitos e as instruções de instalação e execução estão no
+[README do repositório](https://github.com/02kamk/lakehouse-databricks-medalhao#readme).

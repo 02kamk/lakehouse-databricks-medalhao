@@ -14,11 +14,31 @@ Este README contém as instruções para instalar, configurar e executar o proje
 
 ## Sumário
 
+- [Tecnologias utilizadas](#tecnologias-utilizadas)
 - [Pré-requisitos](#pré-requisitos)
 - [Instalação](#instalação)
 - [Configuração do Databricks](#configuração-do-databricks)
 - [Execução](#execução)
 - [Problemas comuns](#problemas-comuns)
+
+---
+
+## Tecnologias utilizadas
+
+| Tecnologia | Uso no projeto | Versão / ambiente |
+|---|---|---|
+| Ubuntu / WSL2 | preparação do banco e ambiente local | Ubuntu 24.04 LTS |
+| Python | geração dos dados, criação e leitura do banco | 3.10 ou superior |
+| SQLite | banco relacional de origem | biblioteca sqlite3 do Python |
+| Databricks Free Edition | notebooks e Job na nuvem | compute Serverless |
+| Apache Spark / PySpark | transformação dos dados | fornecido pelo Databricks |
+| Delta Lake | tabelas Bronze, Silver e Gold | fornecido pelo Databricks |
+| Unity Catalog | organização de schemas, tabelas e volumes | workspace Databricks |
+| Git / GitHub | versionamento e hospedagem do repositório | versão recente do Git |
+| MkDocs / Material | geração do site de documentação | 1.6.1 / 9.7.7 |
+
+As dependências locais estão em `requirements-docs.txt`. Spark e Delta são utilizados
+no Databricks; não são instalados na máquina local por esse arquivo.
 
 ---
 
@@ -159,5 +179,5 @@ Clique em **Run now**. O notebook `00_configurar` não entra no Job.
 | `academia.db` não encontrado | confira o upload no volume `origem.arquivos` |
 | Hash diferente do manifesto | envie o banco e o manifesto da mesma geração |
 | Tarefas em `Blocked` | confira se a tarefa anterior terminou com sucesso |
-| Falha na validação | abra a saída da tarefa que falhou e siga o roteiro de testes no MkDocs |
+| Falha na validação | abra a saída da tarefa que falhou e consulte os critérios na documentação |
 | Falha de autenticação Git | confira sua autenticação e acesso ao repositório |
