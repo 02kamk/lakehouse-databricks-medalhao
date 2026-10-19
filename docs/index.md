@@ -49,4 +49,4 @@ Landing/dados é interpretado como schema landing e volume dados. Um schema regi
 
 ## Estado da entrega
 
-Os testes locais da origem e sintaxe passaram. Durante a execução guiada, o grupo confirmou upload, execução dos notebooks, zero rejeições na Silver e sucesso do Job completo. Uma captura mostrou as cinco tarefas em sucesso; a reexecução também foi confirmada pelo estudante. A publicação do novo repositório e do site deve ser conferida após executar os comandos de Git e MkDocs. Testes locais, execução remota e publicação são verificações distintas.
+Os testes locais da origem e sintaxe passaram. Durante a execução guiada, o grupo confirmou upload, execução dos notebooks, zero rejeições na Silver e sucesso do Job completo. Uma captura mostrou as cinco tarefas em sucesso; a reexecução também foi confirmada pelo estudante. A documentação conceitual fica neste site; as instruções de instalação, configuração e execução ficam no README do repositório. Testes locais, execução remota e publicação são verificações distintas.

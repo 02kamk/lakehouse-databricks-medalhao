@@ -1,48 +1,61 @@
-# Testes para apresentar
+# Validações e resultados
 
-## Etapa local
+## Critérios de validação
 
-```bash
-source .venv/bin/activate
-bash scripts/testar.sh
-```
+O pipeline compara contagens entre camadas, verifica unicidade das chaves, referências
+entre tabelas e conservação dos valores financeiros. Esses controles indicam se as
+transformações preservaram os eventos da origem sem perda ou multiplicação.
 
-O script usa set -euo pipefail: falha no primeiro erro e não imprime sucesso após falha. Verifica banco, FKs, hash do snapshot, contagens de todas as tabelas, sintaxe Python dos notebooks e documentação estrita. O relatório evidencias/testes-locais.txt contém o que foi executado no ambiente de preparação; repita no Ubuntu.
+| Controle | Critério |
+|---|---|
+| Landing e Bronze | contagens iguais às da extração |
+| Silver | bronze = silver + rejeitados |
+| Chaves primárias | ausência de IDs duplicados nas tabelas válidas |
+| Chaves estrangeiras | ausência de referências a dimensões inexistentes |
+| Check-ins na Gold | uma linha por check-in e soma de quantidade igual ao total válido |
+| Receita recebida | soma de valor_recebido igual à soma de pagamentos PAGO na Silver |
+| Reexecução | conservação dos totais sobre o mesmo snapshot |
 
-## Etapa Databricks obrigatória
+## Base original
 
-1. Execute Job completo e salve o Run ID, data/hora e captura das cinco tarefas verdes.
-2. Execute `SELECT * FROM silver.auditoria_qualidade`: cada linha deve satisfazer bronze=silver+rejeitados; os dados originais devem resultar em zero rejeições.
-3. Execute `DESCRIBE DETAIL bronze.alunos`: format deve ser delta. Repita em silver.alunos e gold.fato_pagamento.
-4. O notebook 05 verifica reconciliação de contagens, unicidade, FKs principais, conservação dos check-ins e soma exata dos valores recebidos. O Job falha se houver rejeições na base original.
-5. Execute o Job de novo sem alterar o snapshot. Compare contagens por tabela, total de visitas e receita; devem ser iguais. Capture os dois Run IDs.
-6. Confira ausência de órfãos da unidade: `SELECT count(*) FROM gold.fato_checkin f LEFT ANTI JOIN gold.dim_unidade d ON f.sk_unidade=d.sk_unidade`; esperado 0. Para o tempo, faça a mesma consulta com sk_tempo. Confira competência em fato_pagamento com sk_competencia=dim_tempo.sk_tempo.
+| Tabela | Quantidade de registros |
+|---|---:|
+| planos | 4 |
+| unidades | 4 |
+| alunos | 300 |
+| checkins | 7.684 |
+| pagamentos | 2.156 |
 
-## Teste negativo de qualidade em ambiente isolado
+O estudante confirmou zero rejeições nas cinco tabelas da Silver. Assim, na base
+original, as contagens foram preservadas entre Bronze e Silver. Quarentena vazia
+nesse conjunto não elimina a necessidade das regras: elas protegem o processamento
+contra entradas inválidas futuras.
 
-Não altere a origem usada na apresentação. Crie uma cópia do notebook 03 para teste e use outro catálogo/schema de laboratório ou restaure a Bronze executando 02 antes de voltar ao fluxo normal. Na Bronze de teste, insira uma linha de planos com ID novo e valor_mensal='abc'; outra com ID duplicado; e um aluno com id_plano inexistente. Execute 03. Esperado: registros inválidos na quarentena, nenhuma PK duplicada na Silver e conservação bronze=silver+quarentena. O notebook 05 deve falhar com rejeições: é a barreira de qualidade funcionando. Depois, execute o Job completo na base original e confirme zero rejeições. Registre os SQLs usados e capturas reais; não fabrique evidências.
+## Execução do Job
 
-## Checklist no dia
+Uma captura compartilhada pelo estudante mostrou as tarefas extrair, bronze, silver,
+gold e validar em sucesso. A validação dos notebooks e o teste de reexecução também
+foram confirmados durante o acompanhamento.
 
-- Abrir a conta e confirmar disponibilidade da cota serverless antes da aula.
-- Ter ZIP, PDF e documentação local acessíveis.
-- Confirmar catálogo dos widgets e arquivos do snapshot no volume de origem.
-- Rodar o Job com antecedência; manter a execução concluída aberta.
-- Conferir README e MkDocs no novo repositório.
-- Mostrar código, execução verde, qualidade e consultas Gold.
-- Se o serviço estiver indisponível, mostrar evidências já coletadas e declarar a indisponibilidade. Um print não substitui teste novo.
+O registro em evidencias/validacao-databricks.md, no repositório, distingue evidências
+visuais e confirmações do estudante. Não houve execução remota independente pelo
+assistente. Os totais numéricos das consultas não foram fornecidos na última confirmação,
+portanto não são apresentados aqui como uma comparação independente.
 
-## Problemas comuns
+## Análises disponibilizadas
 
-| Erro | Ação |
-| --- | --- |
-| CATALOG/SCHEMA_NOT_FOUND | Verificar catalogo e rodar 00 |
-| PERMISSION_DENIED | Usar catálogo permitido e conferir privilégios |
-| academia.db não encontrado | Enviar arquivo ao volume origem/arquivos correto |
-| Snapshot diferente do manifesto | Enviar banco e manifesto da mesma geração |
-| SQLITE error | Confirmar upload binário completo; reconstruir com preparar_origem.py |
-| CSV faltando | Rodar 01; verificar se a tarefa terminou |
-| Quarentena maior que zero | Abrir JSON original e corrigir a origem ou regra justificada |
-| Quota serverless esgotada | Consultar limites na interface e aguardar liberação; ensaiar antes |
-| MkDocs não encontrado | Ativar .venv e instalar requirements-docs.txt |
-| Job não encontra notebook | Selecionar o caminho real no Workspace, sem copiar SEU_EMAIL |
+- **Receita recebida por competência:** considera pagamentos com status PAGO e agrupa
+  pela competência. Representa recebimentos associados ao mês da cobrança, não fluxo
+  de caixa agrupado pela data efetiva de pagamento.
+- **Visitas por unidade:** soma a medida quantidade da fato_checkin, relacionada à
+  dimensão unidade, permitindo comparar a utilização das unidades da academia.
+
+## Limites dos testes
+
+As verificações locais cobrem integridade do SQLite, hash, contagens e sintaxe dos
+notebooks. O build do MkDocs valida a documentação. Essas verificações são distintas
+da execução do Spark e do Job no Databricks.
+
+As regras implementadas encaminham dados inválidos para quarentena. O teste negativo
+com registros deliberadamente inválidos não foi confirmado pelo estudante e não é
+tratado como evidência de teste concluído.
