@@ -1,0 +1,60 @@
+Ambiente de preparação: Python empacotado no Windows. Não é execução no Ubuntu ou Databricks.
+$ python scripts/gerar_dados.py
+unidades         4 linhas
+planos           4 linhas
+alunos         300 linhas
+checkins      7684 linhas
+pagamentos    2156 linhas
+
+EXIT=0
+
+$ python scripts/preparar_origem.py
+{
+  "tables": {
+    "planos": 4,
+    "unidades": 4,
+    "alunos": 300,
+    "checkins": 7684,
+    "pagamentos": 2156
+  },
+  "sha256": "235b229a2eaafaf822fb672b9a2f7c9b32f3b1728277d42ad32f7f7351b3c393"
+}
+
+EXIT=0
+
+$ python scripts/testar_local.py
+PASSOU: origem, integridade referencial, contagens, hash e sintaxe dos notebooks. Spark/Databricks ainda requer execução remota.
+
+EXIT=0
+
+$ python -m mkdocs build --strict
+
+ │  ⚠  Warning from the Material for MkDocs team
+ │
+ │  MkDocs 2.0, the underlying framework of Material for MkDocs,
+ │  will introduce backward-incompatible changes, including:
+ │
+ │  × All plugins will stop working – the plugin system has been removed
+ │  × All theme overrides will break – the theming system has been rewritten
+ │  × No migration path exists – existing projects cannot be upgraded
+ │  × Closed contribution model – community members can't report bugs
+ │  × Currently unlicensed – unsuitable for production use
+ │
+ │  Our full analysis:
+ │
+ │  https://squidfunk.github.io/mkdocs-material/blog/2026/02/18/mkdocs-2.0/
+
+INFO    -  Cleaning site directory
+INFO    -  Building documentation to directory: C:\Users\kamil\Documents\Codex\2026-10-19\c\outputs\lakehouse-academia\site
+INFO    -  Documentation built in 0.49 seconds
+
+EXIT=0
+
+Verificação final após ampliação das FKs Gold:
+PASSOU: origem, integridade referencial, contagens, hash e sintaxe dos notebooks. Spark/Databricks ainda requer execução remota.
+
+Verificação final após ampliação das FKs Gold:
+PASSOU: origem, integridade referencial, contagens, hash e sintaxe dos notebooks. Spark/Databricks ainda requer execução remota.
+
+Verificação final após ampliação das FKs Gold:
+PASSOU: origem, integridade referencial, contagens, hash e sintaxe dos notebooks. Spark/Databricks ainda requer execução remota.

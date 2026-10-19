@@ -1,0 +1,13 @@
+site_name: Lakehouse da Academia
+theme:
+  name: material
+  language: pt
+nav:
+  - "Início": index.md
+  - "Instalação": instalacao.md
+  - "Execução e Job": execucao.md
+  - "Qualidade e modelagem": modelagem.md
+  - "Testes": testes.md
+  - "Apresentação": apresentacao.md
+  - "GitHub e MkDocs": github.md
+  - "Referências": referencias.md
