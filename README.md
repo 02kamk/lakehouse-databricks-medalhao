@@ -2,135 +2,55 @@
 
 ![Python](https://img.shields.io/badge/Python-3.x-3776AB?logo=python&logoColor=white)
 ![Databricks](https://img.shields.io/badge/Databricks-Free%20Edition-FF3621?logo=databricks&logoColor=white)
-![Delta Lake](https://img.shields.io/badge/Delta%20Lake-Bronze%20%7C%20Silver%20%7C%20Gold-00ADD4)
-![SQLite](https://img.shields.io/badge/SQLite-origem%20relacional-003B57?logo=sqlite&logoColor=white)
 ![MkDocs](https://img.shields.io/badge/MkDocs-Material-526CFE?logo=materialformkdocs&logoColor=white)
 
-📘 **Documentação (disponível após publicação):** https://02kamk.github.io/lakehouse-databricks-medalhao/
+📘 **Documentação do trabalho:** https://02kamk.github.io/lakehouse-databricks-medalhao/
 
 👥 **Integrantes:** Kamily Hilário das Luzes · Kauã Lucas Alves Barbosa
+
+Este README contém as instruções para instalar, configurar, executar e testar o projeto.
 
 ---
 
 ## Sumário
 
-- [Descrição](#descrição)
-- [Avisos](#avisos)
 - [Pré-requisitos](#pré-requisitos)
 - [Instalação](#instalação)
-- [Howto - como executar](#howto)
+- [Configuração do Databricks](#configuração-do-databricks)
+- [Execução](#execução)
 - [Testes](#testes)
-- [Documentação](#documentação)
-- [Referências](#referências)
-
----
-
-## Descrição
-
-Trabalho 3 da disciplina de **Engenharia de Dados (SATC)**, continuação do
-[Trabalho 1](https://github.com/02kamk/apachespark) e do
-[Trabalho 2](https://github.com/02kamk/spark-minio-delta-lake).
-
-O projeto implementa um **Lakehouse no Databricks Free Edition**, com a arquitetura
-**Medalhão**: extrai todas as tabelas de um banco relacional para **CSV na Landing**,
-grava tabelas **Delta Lake na Bronze**, aplica **Data Quality na Silver** e constrói
-um **modelo dimensional na Gold**. Um **Job sequencial** encadeia os notebooks e a validação final.
-
-O cenário continua sendo uma **academia**, com as cinco tabelas e o gerador de dados
-do trabalho 2. A origem deste trabalho é **SQLite**, conforme a escolha livre de banco
-prevista no enunciado. SQL Server e MinIO fazem parte do trabalho anterior.
-
-```mermaid
-flowchart LR
-    A["SQLite: 5 tabelas"] --> B["Landing: CSV"]
-    B --> C["Bronze: Delta Lake"]
-    C --> D["Silver: qualidade"]
-    D --> E["Gold: dimensões e fatos"]
-    D --> Q["Quarentena e auditoria"]
-    E --> V["Validações e análises"]
-```
-
-O **Ubuntu no WSL2** prepara o banco e a documentação. O **Databricks** executa o Spark
-na nuvem, em compute **Serverless**. Este README explica como instalar, executar e testar;
-a documentação MkDocs explica a arquitetura, as regras e a modelagem.
-
----
-
-## Avisos
-
-> [!IMPORTANT]
-> **Repositório separado.** O trabalho 3 deve ter um novo repositório.
-> Nome utilizado nesta configuração: `lakehouse-databricks-medalhao`.
-
-> [!NOTE]
-> **Não é necessário instalar Spark ou Databricks no Ubuntu.** O Databricks é acessado
-> pelo navegador. Java, Docker, MinIO e ODBC não são dependências deste trabalho.
-
-> [!WARNING]
-> **Carga completa:** os notebooks substituem as tabelas de mesmo nome em `bronze`,
-> `silver` e `gold` no catálogo informado. Use um ambiente acadêmico dedicado, um Job
-> por vez e um snapshot estável durante a execução.
-
-> [!IMPORTANT]
-> **Banco e manifesto precisam corresponder.** Se reconstruir `academia.db`, envie
-> novamente o banco e `origem_manifest.json` para o volume de origem.
-
-> [!NOTE]
-> Os dados são fictícios. A Free Edition exige internet e possui cotas de compute.
-> O modelo usa dimensões tipo 1 e chaves técnicas derivadas dos IDs da origem única.
-> Não há histórico contratual nem carga incremental neste laboratório.
+- [Documentação local](#documentação-local)
+- [Publicação da documentação](#publicação-da-documentação)
+- [Problemas comuns](#problemas-comuns)
 
 ---
 
 ## Pré-requisitos
 
-### Ambiente
+| Requisito | Versão / configuração |
+|---|---|
+| Ubuntu | 24.04 LTS, nativo ou no WSL2 |
+| Python | 3.10 ou superior, com suporte a venv |
+| Git | versão recente |
+| Databricks | conta Free Edition com acesso a Serverless |
+| Catálogo | permissão para criar schemas, volumes e tabelas e ler/gravar arquivos |
 
-| Componente | Configuração | Finalidade |
-|---|---|---|
-| Ubuntu | 24.04 LTS no WSL2 ou Linux equivalente | preparação local |
-| Python | 3.10 ou superior | scripts, banco e documentação |
-| Git | versão recente | versionamento e publicação |
-| Databricks | Free Edition, compute Serverless | notebooks e Job |
-| Unity Catalog | catálogo com permissões de criação, leitura e escrita | schemas, volumes e tabelas |
-
-### Bibliotecas e ferramentas
-
-| Componente | Versão | Observação |
-|---|---|---|
-| `sqlite3` do Python | biblioteca padrão | cria e consulta a origem |
-| `mkdocs` | 1.6.1 | gera a documentação |
-| `mkdocs-material` | 9.7.7 | tema do site |
-| Spark e Delta Lake | fornecidos pelo Databricks | não instalar via pip no workspace |
-
-As dependências diretas da documentação estão em [`requirements-docs.txt`](requirements-docs.txt).
-A pasta `.venv/` não entra no Git.
+> [!NOTE]
+> Execute os comandos deste README no terminal do **Ubuntu**.
+> Não é necessário instalar Spark, Java, Docker ou Databricks no computador.
 
 ---
 
 ## Instalação
 
-Todos os comandos são executados no **terminal do Ubuntu**.
-
-### 1. Instalar utilitários
+### 1. Instalar os pacotes do sistema
 
 ```bash
 sudo apt update
 sudo apt install -y python3 python3-venv python3-pip git sqlite3
-python3 --version
-git --version
-sqlite3 --version
 ```
 
-### 2. Entrar no projeto
-
-Para uma cópia já existente:
-
-```bash
-cd ~/projetos/lakehouse-academia
-```
-
-Depois da publicação, uma máquina nova pode clonar o repositório:
+### 2. Clonar o repositório
 
 ```bash
 mkdir -p ~/projetos
@@ -139,7 +59,13 @@ git clone https://github.com/02kamk/lakehouse-databricks-medalhao.git lakehouse-
 cd lakehouse-academia
 ```
 
-### 3. Criar o ambiente virtual
+Se já possui o projeto, entre na pasta existente:
+
+```bash
+cd ~/projetos/lakehouse-academia
+```
+
+### 3. Criar e ativar o ambiente virtual
 
 ```bash
 python3 -m venv .venv
@@ -147,7 +73,9 @@ source .venv/bin/activate
 python -m pip install -r requirements-docs.txt
 ```
 
-### 4. Preparar a origem, na primeira montagem ou reconstrução
+### 4. Gerar o banco de origem
+
+Execute na primeira instalação:
 
 ```bash
 python scripts/gerar_dados.py
@@ -155,46 +83,58 @@ python scripts/preparar_origem.py
 python scripts/testar_local.py
 ```
 
-São criados os CSVs, `data/academia.db` e o manifesto com hash e contagens.
-Se o banco já foi enviado ao Databricks e o Job passou, **não precisa reconstruir a origem
-para executar ou publicar o MkDocs**.
+Confira se foram criados `data/academia.db` e `data/origem_manifest.json`.
 
-### 5. Configurar o Databricks
+> [!IMPORTANT]
+> Se reconstruir o banco, envie novamente os dois arquivos ao Databricks.
+> Para atualizar apenas README ou MkDocs, não é necessário executar os geradores.
 
-1. Entre na sua conta Free Edition.
-2. Importe `notebooks/*.py` como notebooks Python no formato SOURCE.
-3. Abra `00_configurar`, informe o catálogo permitido no parâmetro `catalogo` e execute tudo.
-4. O padrão é `workspace`; use o mesmo valor em todos os notebooks e tarefas.
-5. Envie `academia.db` e `origem_manifest.json` para o volume:
+---
+
+## Configuração do Databricks
+
+1. Entre no Databricks Free Edition pelo navegador.
+2. Em **Workspace**, crie a pasta `lakehouse-academia/notebooks` na sua área de usuário.
+3. Importe os seis arquivos `.py` de `notebooks/` como notebooks Python.
+4. Abra `00_configurar`, selecione **Serverless** e informe `workspace` no parâmetro `catalogo`.
+5. Execute **Run all**. Se seu catálogo tiver outro nome, use esse nome em todos os notebooks e tarefas.
+6. Em **Catalog**, abra `workspace → origem → Volumes → arquivos`.
+7. Clique em **Upload to this volume** e envie `academia.db` e `origem_manifest.json` da pasta `data/`.
+
+Destino padrão:
 
 ```text
 /Volumes/workspace/origem/arquivos/
 ```
 
-Se usar outro catálogo, ajuste o caminho. O notebook `00` cria os schemas e volumes;
-ele fica fora do Job.
+Para abrir a pasta pelo Ubuntu no WSL:
+
+```bash
+cd ~/projetos/lakehouse-academia/data
+explorer.exe .
+```
 
 ---
 
-<a id="howto"></a>
-## Howto - como executar
+## Execução
 
-### Ordem dos notebooks
+### Execução manual
 
-| Notebook | Etapa | Resultado |
-|---|---|---|
-| `00_configurar` | preparação inicial | schemas e volumes |
-| `01_extrair_landing` | extrair todas as tabelas SQLite | cinco CSVs e manifesto |
-| `02_landing_bronze` | CSV para Delta | cinco tabelas Bronze e `_ingestao` |
-| `03_bronze_silver` | qualidade | Silver, quarentenas e auditoria |
-| `04_silver_gold` | modelo dimensional | quatro dimensões e duas fatos |
-| `05_validar` | testes e análises | reconciliações, receita e visitas |
+Após configurar o ambiente e enviar os arquivos, execute **Run all** em cada notebook nesta ordem:
 
-### Job sequencial
+1. `01_extrair_landing`
+2. `02_landing_bronze`
+3. `03_bronze_silver`
+4. `04_silver_gold`
+5. `05_validar`
 
-Em **Jobs & Pipelines**, crie o Job `academia-medalhao`:
+Confira o mesmo valor de `catalogo` em todos os notebooks.
 
-| Tarefa | Notebook | Depends on |
+### Execução pelo Job
+
+Em **Jobs & Pipelines**, crie o Job `academia-medalhao` e adicione:
+
+| Task name | Notebook | Depends on |
 |---|---|---|
 | `extrair` | `01_extrair_landing` | nenhuma |
 | `bronze` | `02_landing_bronze` | `extrair` |
@@ -202,131 +142,60 @@ Em **Jobs & Pipelines**, crie o Job `academia-medalhao`:
 | `gold` | `04_silver_gold` | `silver` |
 | `validar` | `05_validar` | `gold` |
 
-Em todas as tarefas: **Serverless**, **`catalogo=workspace`** e **Run if: All succeeded**.
-Ajuste o catálogo se necessário. Configure uma execução simultânea do Job.
-Clique em **Run now** e confira as cinco tarefas em **Succeeded**.
+Em todas as tarefas, use **Serverless**, **Run if: All succeeded** e o parâmetro
+`catalogo` com valor `workspace` (ou seu catálogo). Configure uma execução simultânea do Job.
 
-[`jobs/job.template.json`](jobs/job.template.json) é uma referência estrutural;
-substitua os caminhos com `SEU_EMAIL` antes de utilizá-lo em uma API.
+Clique em **Run now**. O notebook `00_configurar` não entra no Job.
 
-### Acompanhar os dados
-
-| Camada | Local no Catalog Explorer |
-|---|---|
-| Origem | `workspace.origem.arquivos` (volume) |
-| Landing | `workspace.landing.dados` (volume CSV) |
-| Bronze | `workspace.bronze` |
-| Silver | `workspace.silver`, incluindo quarentenas e auditoria |
-| Gold | `workspace.gold` |
-
-### Estrutura do projeto
-
-```text
-lakehouse-academia/
-├── .github/workflows/docs.yml   # verificações no GitHub Actions
-├── data/                       # CSVs e manifesto; banco gerado localmente
-├── docs/                       # páginas do MkDocs
-├── evidencias/                 # registros de validação
-├── jobs/job.template.json      # referência do Job
-├── notebooks/                  # configuração e pipeline Databricks
-├── scripts/                    # gerador, banco e testes
-├── .gitignore
-├── mkdocs.yml
-├── requirements-docs.txt
-└── README.md
-```
+> [!WARNING]
+> A execução substitui as tabelas do projeto no catálogo informado.
+> Use um ambiente dedicado e não inicie execuções simultâneas.
 
 ---
 
 ## Testes
 
-### 1. Verificação local sem reconstruir o banco
+### Verificação local
 
 ```bash
+cd ~/projetos/lakehouse-academia
 source .venv/bin/activate
 python scripts/testar_local.py
 ```
 
-Confere integridade referencial, hash do snapshot, contagens CSV/banco e sintaxe
-dos notebooks. Requer os arquivos gerados na instalação. Não executa o Spark remoto.
+O comando deve terminar com `PASSOU`.
 
-### 2. Validação no Databricks
+### Verificação no Databricks
 
-| Verificação | Resultado esperado |
-|---|---|
-| Job | cinco tarefas em `Succeeded` |
-| Planos e unidades | 4 registros em cada tabela da base original |
-| Alunos | 300 registros |
-| Check-ins | 7.684 registros |
-| Pagamentos | 2.156 registros |
-| Qualidade | `bronze = silver + rejeitados`; zero rejeições na base original |
-| Gold | fatos sem perda ou multiplicação de eventos; FKs válidas |
-| Receita | `valor_recebido` corresponde aos pagamentos com status `PAGO` |
-| Reexecução | mesmos totais sobre o mesmo snapshot |
+1. Execute o Job completo e confira as cinco tarefas em **Succeeded**.
+2. Abra a saída de `validar` e confira **TODAS AS VALIDACOES PASSARAM**.
+3. Execute novamente sem alterar os arquivos da origem e compare os totais das consultas.
 
-O notebook `05_validar` deve terminar com **`TODAS AS VALIDACOES PASSARAM`**.
-O grupo confirmou o Job completo e o teste de reexecução durante a validação guiada.
-Uma captura mostrou as cinco tarefas em sucesso. Consulte o
-[registro de validação](evidencias/validacao-databricks.md).
-
-### 3. Build estrito da documentação
+### Verificação do MkDocs
 
 ```bash
 python -m mkdocs build --strict
 ```
 
-Deve terminar com `Documentation built` e código zero. O build valida os avisos
-detectados pelo MkDocs; não comprova disponibilidade de todas as URLs externas nem executa o Job.
-
-### 4. Teste completo local com reconstrução da origem
-
-```bash
-bash scripts/testar.sh
-```
-
-Esse comando **reconstrói o banco e o manifesto**. Se utilizá-lo, reenvie os dois arquivos
-ao volume de origem para manter o snapshot sincronizado com o ambiente local.
-
-### Problemas comuns
-
-| Erro | Solução |
-|---|---|
-| `No module named mkdocs` | ativar `.venv` e instalar `requirements-docs.txt` |
-| Volume ou schema não encontrado | conferir `catalogo` e executar `00_configurar` |
-| Banco não encontrado | conferir upload no volume `origem.arquivos` |
-| Hash diferente do manifesto | enviar banco e manifesto da mesma geração |
-| Tarefas `Blocked` | aguardam a dependência; conferir a tarefa anterior |
-| Rejeições na Silver | revisar os registros originais na quarentena |
-| Falha de autenticação Git | conferir acesso ao repositório e credenciais Git |
+O comando deve terminar com `Documentation built` e código de saída zero.
 
 ---
 
-## Documentação
-
-📘 **Endereço configurado para o GitHub Pages:** https://02kamk.github.io/lakehouse-databricks-medalhao/
-
-O site fica disponível após publicar a branch `gh-pages` e configurar o Pages.
-
-| Página | Conteúdo |
-|---|---|
-| [Contexto e arquitetura](docs/index.md) | objetivo, camadas e continuidade dos trabalhos |
-| [Instalação](docs/instalacao.md) | Ubuntu/WSL e cadastro Databricks |
-| [Execução e Job](docs/execucao.md) | notebooks, dependências e reexecução |
-| [Qualidade e modelagem](docs/modelagem.md) | tipos, PK/FK, quarentena e estrelas Kimball |
-| [Testes](docs/testes.md) | verificações e checklist |
-| [Apresentação](docs/apresentacao.md) | roteiro e perguntas do professor |
-| [GitHub e MkDocs](docs/github.md) | versionamento e publicação |
-| [Referências](docs/referencias.md) | fontes e créditos |
-
-Para visualizar localmente:
+## Documentação local
 
 ```bash
+cd ~/projetos/lakehouse-academia
+source .venv/bin/activate
 python -m mkdocs serve
 ```
 
-Abra http://127.0.0.1:8000. Use **Ctrl+C** para encerrar.
+Abra http://127.0.0.1:8000 no navegador. Pressione **Ctrl+C** no terminal para encerrar.
 
-Depois de salvar e enviar as alterações à branch principal, publique:
+---
+
+## Publicação da documentação
+
+Com as alterações salvas e enviadas ao repositório:
 
 ```bash
 python -m mkdocs build --strict
@@ -334,18 +203,20 @@ python -m mkdocs gh-deploy --strict
 ```
 
 No GitHub, configure **Settings → Pages → Deploy from a branch → gh-pages → /(root)**.
-O workflow incluído valida o projeto; a publicação é feita pelo comando acima.
+
+Depois da publicação, acesse https://02kamk.github.io/lakehouse-databricks-medalhao/.
 
 ---
 
-## Referências
+## Problemas comuns
 
-- [Trabalho 1: Apache Spark, Delta Lake e Iceberg](https://github.com/02kamk/apachespark)
-- [Trabalho 2: SQL Server, MinIO e Delta Lake](https://github.com/02kamk/spark-minio-delta-lake)
-- [Databricks Free Edition](https://docs.databricks.com/aws/en/getting-started/free-edition)
-- [Limitações da Free Edition](https://docs.databricks.com/aws/en/getting-started/free-edition-limitations)
-- [Unity Catalog Volumes](https://docs.databricks.com/aws/en/volumes/volume-files)
-- [Lakeflow Jobs](https://docs.databricks.com/aws/en/jobs/configure-job)
-- [SQLite no Python](https://docs.python.org/3/library/sqlite3.html)
-- [MkDocs: publicação](https://www.mkdocs.org/user-guide/deploying-your-docs/)
-- [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/)
+| Erro | Como resolver |
+|---|---|
+| `No module named mkdocs` | ative `.venv` e instale `requirements-docs.txt` |
+| Volume ou schema não encontrado | confira `catalogo` e execute `00_configurar` |
+| `academia.db` não encontrado | confira o upload no volume `origem.arquivos` |
+| Hash diferente do manifesto | envie o banco e o manifesto da mesma geração |
+| Tarefas em `Blocked` | confira se a tarefa anterior terminou com sucesso |
+| Falha na validação | abra a saída da tarefa que falhou e siga o roteiro de testes no MkDocs |
+| Falha de autenticação Git | confira sua autenticação e acesso ao repositório |
+| Site retorna 404 | confira a configuração do Pages e o término da publicação |

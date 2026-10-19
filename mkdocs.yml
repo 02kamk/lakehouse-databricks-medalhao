@@ -8,6 +8,7 @@ edit_uri: edit/main/docs/
 
 nav:
   - Contexto e arquitetura: index.md
+  - Fundamentos do trabalho: conceitos.md
   - Instalação no Ubuntu e Databricks: instalacao.md
   - Execução e Job sequencial: execucao.md
   - Qualidade e modelo dimensional: modelagem.md
