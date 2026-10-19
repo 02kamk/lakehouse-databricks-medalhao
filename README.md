@@ -4,7 +4,7 @@
 ![Databricks](https://img.shields.io/badge/Databricks-Free%20Edition-FF3621?logo=databricks&logoColor=white)
 ![MkDocs](https://img.shields.io/badge/MkDocs-Material-526CFE?logo=materialformkdocs&logoColor=white)
 
-📘 **Documentação do trabalho:** https://02kamk.github.io/lakehouse-databricks-medalhao/
+> 📘 **[Acessar a documentação completa do trabalho (MkDocs)](https://02kamk.github.io/lakehouse-databricks-medalhao/)**
 
 👥 **Integrantes:** Kamily Hilário das Luzes · Kauã Lucas Alves Barbosa
 
