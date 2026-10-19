@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://02kamk.github.io/lakehouse-databricks-medalhao/modelagem/">
       
       
-        <link rel="prev" href="../conceitos/">
+        <link rel="prev" href="../qualidade/">
       
       
         <link rel="next" href="../testes/">
@@ -29,7 +29,7 @@
     
     
       
-        <title>Qualidade e modelo dimensional - Lakehouse com Databricks e arquitetura Medalhão</title>
+        <title>Modelo dimensional - Lakehouse com Databricks e arquitetura Medalhão</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#qualidade-e-modelo-dimensional" class="md-skip">
+        <a href="#modelo-dimensional" class="md-skip">
           Pular para conteúdo
         </a>
       
@@ -116,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Qualidade e modelo dimensional
+              Modelo dimensional
             
           </span>
         </div>
@@ -269,7 +269,7 @@
   <span class="md-ellipsis">
     
   
-    Contexto e arquitetura
+    Visão geral
   
 
     
@@ -289,14 +289,68 @@
   
   
     <li class="md-nav__item">
-      <a href="../conceitos/" class="md-nav__link">
+      <a href="../dados/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Fundamentos do trabalho
+    Cenário e dados
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pipeline e orquestração
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../qualidade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Qualidade dos dados
   
 
     
@@ -332,7 +386,7 @@
   <span class="md-ellipsis">
     
   
-    Qualidade e modelo dimensional
+    Modelo dimensional
   
 
     
@@ -350,7 +404,7 @@
   <span class="md-ellipsis">
     
   
-    Qualidade e modelo dimensional
+    Modelo dimensional
   
 
     
@@ -376,10 +430,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#bronze" class="md-nav__link">
+  <a href="#objetivo-e-grao" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Bronze
+        Objetivo e grão
       
     </span>
   </a>
@@ -387,10 +441,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#silver" class="md-nav__link">
+  <a href="#dimensoes-compartilhadas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Silver
+        Dimensões compartilhadas
       
     </span>
   </a>
@@ -398,10 +452,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#gold-estrelas-kimball" class="md-nav__link">
+  <a href="#calendario-e-papeis-de-data" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Gold: estrelas Kimball
+        Calendário e papéis de data
       
     </span>
   </a>
@@ -409,10 +463,32 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#relacao-com-trabalhos-1-e-2" class="md-nav__link">
+  <a href="#medidas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Relação com trabalhos 1 e 2
+        Medidas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chaves-e-historico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chaves e histórico
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#agregacao-entre-fatos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Agregação entre fatos
       
     </span>
   </a>
@@ -442,33 +518,6 @@
     
   
     Validações e resultados
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../apresentacao/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Roteiro e perguntas
   
 
     
@@ -535,10 +584,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#bronze" class="md-nav__link">
+  <a href="#objetivo-e-grao" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Bronze
+        Objetivo e grão
       
     </span>
   </a>
@@ -546,10 +595,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#silver" class="md-nav__link">
+  <a href="#dimensoes-compartilhadas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Silver
+        Dimensões compartilhadas
       
     </span>
   </a>
@@ -557,10 +606,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#gold-estrelas-kimball" class="md-nav__link">
+  <a href="#calendario-e-papeis-de-data" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Gold: estrelas Kimball
+        Calendário e papéis de data
       
     </span>
   </a>
@@ -568,10 +617,32 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#relacao-com-trabalhos-1-e-2" class="md-nav__link">
+  <a href="#medidas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Relação com trabalhos 1 e 2
+        Medidas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chaves-e-historico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chaves e histórico
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#agregacao-entre-fatos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Agregação entre fatos
       
     </span>
   </a>
@@ -598,53 +669,90 @@
   
 
 
-<h1 id="qualidade-e-modelo-dimensional">Qualidade e modelo dimensional<a class="headerlink" href="#qualidade-e-modelo-dimensional" title="Permanent link">&para;</a></h1>
-<h2 id="bronze">Bronze<a class="headerlink" href="#bronze" title="Permanent link">&para;</a></h2>
-<p>Cinco tabelas Delta: planos, unidades, alunos, checkins e pagamentos. Colunas recebidas como texto para preservar os valores de origem, mais _ingestao. Não há limpeza silenciosa nessa camada.</p>
-<h2 id="silver">Silver<a class="headerlink" href="#silver" title="Permanent link">&para;</a></h2>
-<p>trim remove espaços nas extremidades; vazios viram nulos; email fica em minúsculas; status e forma de pagamento ficam em maiúsculas. try_cast converte IDs para inteiros, valores para decimal(12,2), datas, timestamps e booleanos. Datas inválidas viram nulos e são rejeitadas quando obrigatórias.</p>
-<p>Regras: IDs positivos e únicos; todas as ocorrências de PK duplicada são rejeitadas; nomes essenciais preenchidos; email com formato básico; valor e duração positivos; datas obrigatórias válidas; domínios de pagamento limitados; pagamento PAGO requer data, PENDENTE/ATRASADO requerem ausência de data; FKs precisam existir nos pais válidos. Pais são processados antes dos filhos. Aluno inválido pode causar rejeição dos seus fatos: isso é propagação de qualidade, não exclusão arbitrária.</p>
-<p>Cada tabela gera silver.quarentena_NOME com o JSON original e motivo geral. silver.auditoria_qualidade registra bronze = silver + rejeitados. Uma evolução útil é detalhar qual regra falhou. Não se alega validação universal de e-mail ou regra temporal de matrícula: alguns registros herdados do gerador acadêmico podem ter eventos anteriores à matrícula. Esse caso deve ser discutido antes de adicionar uma regra nova.</p>
-<h2 id="gold-estrelas-kimball">Gold: estrelas Kimball<a class="headerlink" href="#gold-estrelas-kimball" title="Permanent link">&para;</a></h2>
+<h1 id="modelo-dimensional">Modelo dimensional<a class="headerlink" href="#modelo-dimensional" title="Permanent link">&para;</a></h1>
+<h2 id="objetivo-e-grao">Objetivo e grão<a class="headerlink" href="#objetivo-e-grao" title="Permanent link">&para;</a></h2>
+<p>A Gold utiliza modelagem dimensional para analisar frequência e recebimentos.
+O grão representa o evento descrito por cada linha. Visitas e pagamentos possuem
+grãos distintos e são mantidos em duas tabelas fato.</p>
 <table>
 <thead>
 <tr>
 <th>Tabela</th>
-<th>Grão e papel</th>
+<th>Grão</th>
+<th>Conteúdo</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>dim_aluno</td>
-<td>Uma linha por aluno; nome, cidade, email, situação e plano atual</td>
+<td>um aluno</td>
+<td>identificação, cidade, atividade e plano atual</td>
 </tr>
 <tr>
 <td>dim_plano</td>
-<td>Uma linha por plano</td>
+<td>um plano</td>
+<td>nome, valor de referência e duração</td>
 </tr>
 <tr>
 <td>dim_unidade</td>
-<td>Uma linha por unidade</td>
+<td>uma unidade</td>
+<td>nome, cidade, bairro e inauguração</td>
 </tr>
 <tr>
 <td>dim_tempo</td>
-<td>Uma linha por dia, calendário contínuo entre menor e maior data dos fatos</td>
+<td>um dia</td>
+<td>data, ano, mês, dia e trimestre</td>
 </tr>
 <tr>
 <td>fato_checkin</td>
-<td>Uma linha por check-in; aluno, plano atual, unidade, dia; medida quantidade=1</td>
+<td>um check-in</td>
+<td>aluno, plano atual, unidade, data/hora e quantidade</td>
 </tr>
 <tr>
 <td>fato_pagamento</td>
-<td>Uma linha por pagamento; aluno, plano atual, competência e data de pagamento; valor e valor_recebido</td>
+<td>um pagamento</td>
+<td>aluno, plano atual, competência, data de pagamento, valor, status e forma</td>
 </tr>
 </tbody>
 </table>
-<p>Relacionamentos: dim_aluno 1:N para as duas fatos; dim_plano 1:N para as duas fatos; dim_unidade 1:N para fato_checkin; dim_tempo 1:N para as datas das duas fatos. Em pagamentos a dimensão tempo exerce dois papéis: competência e pagamento. sk_pagamento pode ser nulo para pendentes e atrasados.</p>
-<p>As chaves sk_aluno, sk_plano e sk_unidade são chaves técnicas long derivadas dos IDs da única origem. Não são sequências independentes; isso é uma simplificação explícita do laboratório. A dimensão tempo usa YYYYMMDD. IDs do evento são dimensões degeneradas nas fatos. Dimensões são tipo 1 e carga completa: alterações substituem atributos, sem histórico SCD2. O plano é o plano atual do aluno, pois a origem não contém histórico contratual. Não atribua a receita a um plano histórico que não existe na origem.</p>
-<p>Não unir as duas fatos diretamente por aluno para somar dinheiro: várias visitas multiplicariam pagamentos. Agregue cada fato separadamente antes de cruzar resultados. A medida receita recebida considera apenas status PAGO; valor dos demais registros representa cobrança, não recebimento.</p>
-<h2 id="relacao-com-trabalhos-1-e-2">Relação com trabalhos 1 e 2<a class="headerlink" href="#relacao-com-trabalhos-1-e-2" title="Permanent link">&para;</a></h2>
-<p>Trabalho 1 comparou Delta e Iceberg e demonstrou DML. Trabalho 2 adicionou SQL Server, MinIO, CSV e Delta. Trabalho 3 mantém academia e gerador, muda a origem para SQLite e leva o processamento ao serviço gerenciado Databricks, com qualidade, modelo dimensional e orquestração. Não é necessário reproduzir os comandos DML do trabalho 1 no pipeline novo.</p>
+<h2 id="dimensoes-compartilhadas">Dimensões compartilhadas<a class="headerlink" href="#dimensoes-compartilhadas" title="Permanent link">&para;</a></h2>
+<pre class="mermaid"><code>erDiagram
+    DIM_ALUNO ||--o{ FATO_CHECKIN : descreve
+    DIM_PLANO ||--o{ FATO_CHECKIN : classifica
+    DIM_UNIDADE ||--o{ FATO_CHECKIN : localiza
+    DIM_TEMPO ||--o{ FATO_CHECKIN : data
+    DIM_ALUNO ||--o{ FATO_PAGAMENTO : descreve
+    DIM_PLANO ||--o{ FATO_PAGAMENTO : classifica
+    DIM_TEMPO ||--o{ FATO_PAGAMENTO : competencia_e_pagamento</code></pre>
+<p>Aluno, plano e tempo são compartilhados entre as fatos. Unidade participa apenas
+da análise de check-ins, pois a origem não atribui unidade a cada pagamento.</p>
+<h2 id="calendario-e-papeis-de-data">Calendário e papéis de data<a class="headerlink" href="#calendario-e-papeis-de-data" title="Permanent link">&para;</a></h2>
+<p>dim_tempo possui um calendário contínuo entre a menor e a maior data dos eventos
+considerados. Sua chave é YYYYMMDD. Na fato_pagamento, a dimensão exerce dois papéis:
+sk_competencia identifica a competência e sk_pagamento identifica a data do recebimento.
+sk_pagamento pode ser nulo em cobranças ainda não pagas.</p>
+<h2 id="medidas">Medidas<a class="headerlink" href="#medidas" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>quantidade:</strong> valor 1 por check-in; sua soma representa o total de visitas.</li>
+<li><strong>valor:</strong> montante de cada cobrança, independentemente do status.</li>
+<li><strong>valor_recebido:</strong> igual ao valor quando o status é PAGO e zero nos demais casos.</li>
+</ul>
+<p>A consulta financeira agrupa valor_recebido por competência. Portanto, descreve os
+recebimentos associados ao mês da cobrança, sem representar fluxo de caixa agrupado
+pelo dia efetivo de recebimento.</p>
+<h2 id="chaves-e-historico">Chaves e histórico<a class="headerlink" href="#chaves-e-historico" title="Permanent link">&para;</a></h2>
+<p>sk_aluno, sk_plano e sk_unidade são chaves técnicas long derivadas dos IDs da única
+origem. Essa escolha mantém valores estáveis no laboratório, mas não constitui um
+mapeamento de chaves independente para múltiplas fontes.</p>
+<p>As dimensões são tipo 1, reconstruídas na carga completa. Não existe SCD2, e o plano
+relacionado aos fatos corresponde ao cadastro atual do aluno. A origem não permite
+afirmar qual plano estava vigente em cada evento histórico.</p>
+<p>Os identificadores dos eventos são preservados nas fatos como dimensões degeneradas,
+permitindo rastrear a linha analítica até o evento de origem.</p>
+<h2 id="agregacao-entre-fatos">Agregação entre fatos<a class="headerlink" href="#agregacao-entre-fatos" title="Permanent link">&para;</a></h2>
+<p>Uma junção direta das duas fatos por aluno pode multiplicar pagamentos pelo número
+de visitas. Análises conjuntas exigem agregações separadas em um grão compatível antes
+de combinar os resultados. As consultas disponibilizadas utilizam cada fato separadamente.</p>
 
 
 
@@ -682,7 +790,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Rodapé" >
         
           
-          <a href="../conceitos/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Fundamentos do trabalho">
+          <a href="../qualidade/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Qualidade dos dados">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -692,7 +800,7 @@
                 Anterior
               </span>
               <div class="md-ellipsis">
-                Fundamentos do trabalho
+                Qualidade dos dados
               </div>
             </div>
           </a>

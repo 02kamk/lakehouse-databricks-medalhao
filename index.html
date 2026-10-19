@@ -16,7 +16,7 @@
       
       
       
-        <link rel="next" href="conceitos/">
+        <link rel="next" href="dados/">
       
       
         
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#trabalho-3-lakehouse-da-academia" class="md-skip">
+        <a href="#lakehouse-da-academia" class="md-skip">
           Pular para conteúdo
         </a>
       
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Contexto e arquitetura
+              Visão geral
             
           </span>
         </div>
@@ -276,7 +276,7 @@
   <span class="md-ellipsis">
     
   
-    Contexto e arquitetura
+    Visão geral
   
 
     
@@ -294,7 +294,7 @@
   <span class="md-ellipsis">
     
   
-    Contexto e arquitetura
+    Visão geral
   
 
     
@@ -320,10 +320,21 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#objetivo-e-rastreabilidade" class="md-nav__link">
+  <a href="#objetivo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Objetivo e rastreabilidade
+        Objetivo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#escopo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Escopo
       
     </span>
   </a>
@@ -342,10 +353,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#orquestracao" class="md-nav__link">
+  <a href="#continuidade-dos-trabalhos-anteriores" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Orquestração
+        Continuidade dos trabalhos anteriores
       
     </span>
   </a>
@@ -353,10 +364,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#estado-da-entrega" class="md-nav__link">
+  <a href="#organizacao-desta-documentacao" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Estado da entrega
+        Organização desta documentação
       
     </span>
   </a>
@@ -378,14 +389,68 @@
   
   
     <li class="md-nav__item">
-      <a href="conceitos/" class="md-nav__link">
+      <a href="dados/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Fundamentos do trabalho
+    Cenário e dados
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pipeline e orquestração
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="qualidade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Qualidade dos dados
   
 
     
@@ -412,7 +477,7 @@
   <span class="md-ellipsis">
     
   
-    Qualidade e modelo dimensional
+    Modelo dimensional
   
 
     
@@ -440,33 +505,6 @@
     
   
     Validações e resultados
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="apresentacao/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Roteiro e perguntas
   
 
     
@@ -533,10 +571,21 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#objetivo-e-rastreabilidade" class="md-nav__link">
+  <a href="#objetivo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Objetivo e rastreabilidade
+        Objetivo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#escopo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Escopo
       
     </span>
   </a>
@@ -555,10 +604,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#orquestracao" class="md-nav__link">
+  <a href="#continuidade-dos-trabalhos-anteriores" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Orquestração
+        Continuidade dos trabalhos anteriores
       
     </span>
   </a>
@@ -566,10 +615,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#estado-da-entrega" class="md-nav__link">
+  <a href="#organizacao-desta-documentacao" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Estado da entrega
+        Organização desta documentação
       
     </span>
   </a>
@@ -596,77 +645,78 @@
   
 
 
-<h1 id="trabalho-3-lakehouse-da-academia">Trabalho 3 - Lakehouse da academia<a class="headerlink" href="#trabalho-3-lakehouse-da-academia" title="Permanent link">&para;</a></h1>
-<p><strong>Integrantes:</strong> Kamily Hilário das Luzes · Kauã Lucas Alves Barbosa</p>
-<p>Implementação acadêmica para Ubuntu no WSL2 e Databricks Free Edition. Entrega indicada no enunciado: 21/10. Este material foi preparado em 19/10/2026.</p>
-<h2 id="objetivo-e-rastreabilidade">Objetivo e rastreabilidade<a class="headerlink" href="#objetivo-e-rastreabilidade" title="Permanent link">&para;</a></h2>
+<h1 id="lakehouse-da-academia">Lakehouse da Academia<a class="headerlink" href="#lakehouse-da-academia" title="Permanent link">&para;</a></h1>
+<p><strong>Trabalho 3 - Engenharia de Dados (SATC)</strong><br />
+<strong>Integrantes:</strong> Kamily Hilário das Luzes · Kauã Lucas Alves Barbosa</p>
+<h2 id="objetivo">Objetivo<a class="headerlink" href="#objetivo" title="Permanent link">&para;</a></h2>
+<p>Transformar dados operacionais de uma academia em uma base analítica no Databricks,
+com organização em camadas, regras de qualidade, modelo dimensional e execução
+sequencial dos notebooks por um Job.</p>
+<p>A solução responde a duas questões analíticas: <strong>como os recebimentos se distribuem
+por competência</strong> e <strong>como as visitas se distribuem entre as unidades</strong>.</p>
+<h2 id="escopo">Escopo<a class="headerlink" href="#escopo" title="Permanent link">&para;</a></h2>
+<p>O projeto processa cinco tabelas de um banco SQLite: planos, unidades, alunos,
+checkins e pagamentos. Todas são extraídas para CSV e percorrem as camadas
+Landing, Bronze e Silver. A Gold reúne quatro dimensões e duas tabelas fato.</p>
 <table>
 <thead>
 <tr>
-<th>Requisito do PDF</th>
-<th>Implementação</th>
-<th>Evidência a coletar</th>
+<th>Camada</th>
+<th>Papel na solução</th>
+<th>Saída</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Extrair todas as tabelas do banco</td>
-<td>SQLite com planos, unidades, alunos, checkins e pagamentos; notebook 01 consulta sqlite_master e extrai todas</td>
-<td>Manifesto e cinco CSVs</td>
+<td>Landing</td>
+<td>preservar a extração do banco</td>
+<td>cinco arquivos CSV e manifesto</td>
 </tr>
 <tr>
-<td>Schema Landing/dados em CSV</td>
-<td>Schema landing com volume dados</td>
-<td>Catalog Explorer e CSV aberto</td>
+<td>Bronze</td>
+<td>registrar os dados recebidos em tabelas transacionais</td>
+<td>cinco tabelas Delta</td>
 </tr>
 <tr>
-<td>Bronze em Delta</td>
-<td>Notebook 02, cinco tabelas Delta</td>
-<td>DESCRIBE DETAIL e contagens</td>
+<td>Silver</td>
+<td>converter tipos e aplicar regras de qualidade</td>
+<td>cinco tabelas válidas, quarentenas e auditoria</td>
 </tr>
 <tr>
-<td>Data Quality na Silver</td>
-<td>Notebook 03, tipos, domínios, PK, FK e quarentena</td>
-<td>auditoria_qualidade e rejeições</td>
-</tr>
-<tr>
-<td>Modelo dimensional Kimball</td>
-<td>Notebook 04, quatro dimensões e duas fatos</td>
-<td>Modelo e consultas</td>
-</tr>
-<tr>
-<td>Execução sequencial em Job</td>
-<td>01 -&gt; 02 -&gt; 03 -&gt; 04 -&gt; 05</td>
-<td>Execução Succeeded com cinco tarefas</td>
-</tr>
-<tr>
-<td>Novo GitHub, README e MkDocs</td>
-<td>Pasta independente com configuração e documentação</td>
-<td>URL do novo repositório e site</td>
+<td>Gold</td>
+<td>organizar os eventos para análise</td>
+<td>quatro dimensões e duas fatos</td>
 </tr>
 </tbody>
 </table>
-<p>O material de aula citado no PDF não foi fornecido; o código aqui foi desenvolvido com base nos dois repositórios indicados e na documentação oficial. O banco escolhido é SQLite, permitido pelo enunciado, com as mesmas cinco tabelas e gerador do trabalho 2. Não se afirma que a extração parte do SQL Server. Os CSVs gerados inicialmente servem para popular a origem; no Job, novos CSVs são extraídos do banco SQLite real.</p>
 <h2 id="arquitetura">Arquitetura<a class="headerlink" href="#arquitetura" title="Permanent link">&para;</a></h2>
-<p>O Ubuntu prepara a origem com o gerador do trabalho 2. Os CSVs populam o SQLite; um snapshot do banco e seu manifesto são enviados ao volume origem.arquivos.</p>
 <pre class="mermaid"><code>flowchart LR
-    A["Origem: SQLite"] --&gt; B["Landing: CSV"]
-    B --&gt; C["Bronze: Delta Lake"]
-    C --&gt; D["Silver: tipos e qualidade"]
+    A["Academia: SQLite"] --&gt; B["Landing: CSV"]
+    B --&gt; C["Bronze: conteúdo recebido"]
+    C --&gt; D["Silver: dados validados"]
     D --&gt; E["Gold: dimensões e fatos"]
     D --&gt; Q["Quarentena e auditoria"]
-    E --&gt; V["Validações e análises"]</code></pre>
-<h2 id="orquestracao">Orquestração<a class="headerlink" href="#orquestracao" title="Permanent link">&para;</a></h2>
-<pre class="mermaid"><code>flowchart LR
-    A["extrair: 01"] --&gt; B["bronze: 02"]
-    B --&gt; C["silver: 03"]
-    C --&gt; D["gold: 04"]
-    D --&gt; E["validar: 05"]</code></pre>
-<p>Todas as tarefas usam compute Serverless e o mesmo parâmetro catalogo.
-Cada tarefa prossegue após sucesso da anterior. O notebook 00 prepara o ambiente antes do Job.</p>
-<p>Landing/dados é interpretado como schema landing e volume dados. Um schema registra objetos; um volume armazena arquivos CSV. Caminho: /Volumes/CATALOGO/landing/dados. Não se cria uma tabela Delta na Landing para fingir que ela é CSV.</p>
-<h2 id="estado-da-entrega">Estado da entrega<a class="headerlink" href="#estado-da-entrega" title="Permanent link">&para;</a></h2>
-<p>Os testes locais da origem e sintaxe passaram. Durante a execução guiada, o grupo confirmou upload, execução dos notebooks, zero rejeições na Silver e sucesso do Job completo. Uma captura mostrou as cinco tarefas em sucesso; a reexecução também foi confirmada pelo estudante. A documentação conceitual fica neste site; as instruções de instalação, configuração e execução ficam no README do repositório. Testes locais, execução remota e publicação são verificações distintas.</p>
+    E --&gt; F["Receita por competência"]
+    E --&gt; G["Visitas por unidade"]</code></pre>
+<p>As camadas separam responsabilidades. A extração permanece disponível para comparação;
+a Bronze conserva o conteúdo recebido; a Silver registra quais dados passaram nas regras;
+a Gold estabelece o grão e as relações usadas nas análises.</p>
+<h2 id="continuidade-dos-trabalhos-anteriores">Continuidade dos trabalhos anteriores<a class="headerlink" href="#continuidade-dos-trabalhos-anteriores" title="Permanent link">&para;</a></h2>
+<p>O trabalho 1 explorou Spark, Delta Lake e Iceberg. O trabalho 2 acrescentou extração
+de SQL Server, armazenamento CSV no MinIO e tabelas Delta. O trabalho 3 reutiliza o
+cenário e o gerador de dados do trabalho 2, com SQLite como origem escolhida, e acrescenta
+processamento gerenciado, qualidade, modelagem dimensional e orquestração.</p>
+<h2 id="organizacao-desta-documentacao">Organização desta documentação<a class="headerlink" href="#organizacao-desta-documentacao" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="dados/">Cenário e dados</a>: entidades, relacionamentos e características da base.</li>
+<li><a href="pipeline/">Pipeline e orquestração</a>: o que cada notebook faz e como as etapas se relacionam.</li>
+<li><a href="qualidade/">Qualidade dos dados</a>: conversões, regras, quarentena e auditoria.</li>
+<li><a href="modelagem/">Modelo dimensional</a>: dimensões, fatos, grãos e medidas.</li>
+<li><a href="testes/">Validações e resultados</a>: critérios de consistência, resultados registrados e análises.</li>
+<li><a href="referencias/">Referências</a>: fontes e créditos do projeto.</li>
+</ul>
+<p>As tecnologias, os requisitos e as instruções de instalação e execução estão no
+<a href="https://github.com/02kamk/lakehouse-databricks-medalhao#readme">README do repositório</a>.</p>
 
 
 
@@ -705,13 +755,13 @@ Cada tarefa prossegue após sucesso da anterior. O notebook 00 prepara o ambient
         
         
           
-          <a href="conceitos/" class="md-footer__link md-footer__link--next" aria-label="Próximo: Fundamentos do trabalho">
+          <a href="dados/" class="md-footer__link md-footer__link--next" aria-label="Próximo: Cenário e dados">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Próximo
               </span>
               <div class="md-ellipsis">
-                Fundamentos do trabalho
+                Cenário e dados
               </div>
             </div>
             <div class="md-footer__button md-icon">

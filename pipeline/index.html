@@ -12,13 +12,13 @@
         <meta name="author" content="Kamily Hilário das Luzes, Kauã Lucas Alves Barbosa">
       
       
-        <link rel="canonical" href="https://02kamk.github.io/lakehouse-databricks-medalhao/conceitos/">
+        <link rel="canonical" href="https://02kamk.github.io/lakehouse-databricks-medalhao/pipeline/">
       
       
-        <link rel="prev" href="..">
+        <link rel="prev" href="../dados/">
       
       
-        <link rel="next" href="../modelagem/">
+        <link rel="next" href="../qualidade/">
       
       
         
@@ -29,7 +29,7 @@
     
     
       
-        <title>Fundamentos do trabalho - Lakehouse com Databricks e arquitetura Medalhão</title>
+        <title>Pipeline e orquestração - Lakehouse com Databricks e arquitetura Medalhão</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#fundamentos-do-trabalho" class="md-skip">
+        <a href="#pipeline-e-orquestracao" class="md-skip">
           Pular para conteúdo
         </a>
       
@@ -116,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Fundamentos do trabalho
+              Pipeline e orquestração
             
           </span>
         </div>
@@ -269,7 +269,34 @@
   <span class="md-ellipsis">
     
   
-    Contexto e arquitetura
+    Visão geral
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dados/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cenário e dados
   
 
     
@@ -305,7 +332,7 @@
   <span class="md-ellipsis">
     
   
-    Fundamentos do trabalho
+    Pipeline e orquestração
   
 
     
@@ -323,7 +350,7 @@
   <span class="md-ellipsis">
     
   
-    Fundamentos do trabalho
+    Pipeline e orquestração
   
 
     
@@ -349,10 +376,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#contexto" class="md-nav__link">
+  <a href="#preparacao-da-origem" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Contexto
+        Preparação da origem
       
     </span>
   </a>
@@ -360,10 +387,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#lakehouse" class="md-nav__link">
+  <a href="#etapas-implementadas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Lakehouse
+        Etapas implementadas
       
     </span>
   </a>
@@ -371,10 +398,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#databricks-e-a-experiencia-de-plataforma-gerenciada" class="md-nav__link">
+  <a href="#landing" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Databricks e a experiência de plataforma gerenciada
+        Landing
       
     </span>
   </a>
@@ -382,10 +409,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#arquitetura-medalhao" class="md-nav__link">
+  <a href="#bronze" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Arquitetura Medalhão
+        Bronze
       
     </span>
   </a>
@@ -393,10 +420,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#delta-lake-e-transacoes" class="md-nav__link">
+  <a href="#silver-e-gold" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Delta Lake e transações
+        Silver e Gold
       
     </span>
   </a>
@@ -404,10 +431,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#modelo-dimensional" class="md-nav__link">
+  <a href="#job-sequencial" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Modelo dimensional
+        Job sequencial
       
     </span>
   </a>
@@ -415,32 +442,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#qualidade-e-resultados" class="md-nav__link">
+  <a href="#carga-e-consistencia" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Qualidade e resultados
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#limites" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Limites
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#referencias" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Referências
+        Carga e consistência
       
     </span>
   </a>
@@ -462,6 +467,33 @@
   
   
     <li class="md-nav__item">
+      <a href="../qualidade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Qualidade dos dados
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../modelagem/" class="md-nav__link">
         
   
@@ -469,7 +501,7 @@
   <span class="md-ellipsis">
     
   
-    Qualidade e modelo dimensional
+    Modelo dimensional
   
 
     
@@ -497,33 +529,6 @@
     
   
     Validações e resultados
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../apresentacao/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Roteiro e perguntas
   
 
     
@@ -590,10 +595,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#contexto" class="md-nav__link">
+  <a href="#preparacao-da-origem" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Contexto
+        Preparação da origem
       
     </span>
   </a>
@@ -601,10 +606,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#lakehouse" class="md-nav__link">
+  <a href="#etapas-implementadas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Lakehouse
+        Etapas implementadas
       
     </span>
   </a>
@@ -612,10 +617,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#databricks-e-a-experiencia-de-plataforma-gerenciada" class="md-nav__link">
+  <a href="#landing" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Databricks e a experiência de plataforma gerenciada
+        Landing
       
     </span>
   </a>
@@ -623,10 +628,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#arquitetura-medalhao" class="md-nav__link">
+  <a href="#bronze" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Arquitetura Medalhão
+        Bronze
       
     </span>
   </a>
@@ -634,10 +639,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#delta-lake-e-transacoes" class="md-nav__link">
+  <a href="#silver-e-gold" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Delta Lake e transações
+        Silver e Gold
       
     </span>
   </a>
@@ -645,10 +650,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#modelo-dimensional" class="md-nav__link">
+  <a href="#job-sequencial" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Modelo dimensional
+        Job sequencial
       
     </span>
   </a>
@@ -656,32 +661,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#qualidade-e-resultados" class="md-nav__link">
+  <a href="#carga-e-consistencia" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Qualidade e resultados
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#limites" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Limites
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#referencias" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Referências
+        Carga e consistência
       
     </span>
   </a>
@@ -708,56 +691,82 @@
   
 
 
-<h1 id="fundamentos-do-trabalho">Fundamentos do trabalho<a class="headerlink" href="#fundamentos-do-trabalho" title="Permanent link">&para;</a></h1>
-<h2 id="contexto">Contexto<a class="headerlink" href="#contexto" title="Permanent link">&para;</a></h2>
-<p>Trabalho 3 de Engenharia de Dados (SATC), continuidade dos trabalhos 1 e 2.
-O cenário é uma academia com planos, unidades, alunos, check-ins e pagamentos.
-O gerador e o modelo de origem vêm do trabalho 2. A origem escolhida aqui é SQLite,
-permitida pelo enunciado. SQL Server e MinIO permanecem no projeto anterior.</p>
-<h2 id="lakehouse">Lakehouse<a class="headerlink" href="#lakehouse" title="Permanent link">&para;</a></h2>
-<p>Um Lakehouse combina armazenamento de dados em arquivos com recursos de gerenciamento
-de tabelas e processamento analítico. Neste projeto, o Databricks fornece o ambiente
-de processamento e governança; Delta Lake organiza as tabelas das camadas tratadas.</p>
-<h2 id="databricks-e-a-experiencia-de-plataforma-gerenciada">Databricks e a experiência de plataforma gerenciada<a class="headerlink" href="#databricks-e-a-experiencia-de-plataforma-gerenciada" title="Permanent link">&para;</a></h2>
-<p>O Ubuntu prepara a origem e a documentação. O processamento Spark acontece no Databricks,
-em compute Serverless. O grupo usa notebooks, catálogo, volumes e orquestração sem
-administrar a instalação do Spark nos servidores. Esse uso corresponde à experiência
-de plataforma gerenciada solicitada no enunciado.</p>
-<h2 id="arquitetura-medalhao">Arquitetura Medalhão<a class="headerlink" href="#arquitetura-medalhao" title="Permanent link">&para;</a></h2>
-<ul>
-<li><strong>Landing:</strong> preserva a extração em CSV no volume landing.dados.</li>
-<li><strong>Bronze:</strong> registra o conteúdo recebido em tabelas Delta, inicialmente textual, com data de ingestão.</li>
-<li><strong>Silver:</strong> converte tipos e valida chaves, domínios e campos obrigatórios; conserva rejeições em quarentena.</li>
-<li><strong>Gold:</strong> disponibiliza dimensões e fatos para consultas analíticas.</li>
-</ul>
-<p>Essas responsabilidades ajudam a localizar erros e permitem comparar a origem com
-os resultados tratados. As regras específicas estão em <a href="../modelagem/">Qualidade e modelagem</a>.</p>
-<h2 id="delta-lake-e-transacoes">Delta Lake e transações<a class="headerlink" href="#delta-lake-e-transacoes" title="Permanent link">&para;</a></h2>
-<p>Delta Lake utiliza arquivos de dados e um log transacional para gerenciar versões e
-escritas consistentes em uma tabela. Cada escrita Delta tem sua própria transação;
-isso não torna todas as tabelas e etapas do Job uma transação única. Em caso de falha
-parcial, é preciso corrigir a causa e reexecutar o fluxo.</p>
-<h2 id="modelo-dimensional">Modelo dimensional<a class="headerlink" href="#modelo-dimensional" title="Permanent link">&para;</a></h2>
-<p>O projeto separa check-ins e pagamentos em duas fatos porque são eventos com grãos
-distintos. Aluno, plano, unidade e tempo são dimensões. Há quatro dimensões e duas
-fatos na Gold. O calendário tem papéis de competência e pagamento na fato financeira.</p>
-<p>As dimensões são tipo 1 e as chaves técnicas derivam dos IDs da origem única.
-O plano associado ao aluno é o plano atual, pois a origem não possui histórico contratual.
-Essas simplificações e as medidas estão detalhadas em <a href="../modelagem/">Qualidade e modelagem</a>.</p>
-<h2 id="qualidade-e-resultados">Qualidade e resultados<a class="headerlink" href="#qualidade-e-resultados" title="Permanent link">&para;</a></h2>
-<p>O controle de qualidade deve explicar o destino de cada linha: bronze = silver + rejeitados.
-O grupo confirmou zero rejeições na base original. A base contém quatro planos,
-quatro unidades, 300 alunos, 7.684 check-ins e 2.156 pagamentos.</p>
-<p>O Job completo foi executado pelo estudante, e uma captura mostrou as cinco tarefas
-em sucesso. O estudante também confirmou o teste de reexecução. Os registros e limites
-da evidência estão em evidencias/validacao-databricks.md no repositório.</p>
-<h2 id="limites">Limites<a class="headerlink" href="#limites" title="Permanent link">&para;</a></h2>
-<p>A solução usa carga completa por snapshot, não CDC ou carga incremental. O envio do
-banco é manual, e não existe conexão em tempo real entre o workspace e o SQLite no WSL.
-Receita recebida considera apenas pagamentos com status PAGO. Não se deve juntar
-as duas fatos por aluno antes de somar receitas, pois as visitas poderiam multiplicar os valores.</p>
-<h2 id="referencias">Referências<a class="headerlink" href="#referencias" title="Permanent link">&para;</a></h2>
-<p>Consulte as <a href="../referencias/">fontes e créditos</a>.</p>
+<h1 id="pipeline-e-orquestracao">Pipeline e orquestração<a class="headerlink" href="#pipeline-e-orquestracao" title="Permanent link">&para;</a></h1>
+<h2 id="preparacao-da-origem">Preparação da origem<a class="headerlink" href="#preparacao-da-origem" title="Permanent link">&para;</a></h2>
+<p>O gerador produz a base acadêmica, e o script de preparação cria as cinco tabelas
+SQLite, verifica as referências e registra o manifesto. O snapshot é disponibilizado
+no volume origem.arquivos. Essa preparação é anterior ao Job.</p>
+<h2 id="etapas-implementadas">Etapas implementadas<a class="headerlink" href="#etapas-implementadas" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Notebook</th>
+<th>Responsabilidade</th>
+<th>Resultado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>00_configurar</td>
+<td>preparação dos objetos de armazenamento</td>
+<td>schemas e volumes necessários</td>
+</tr>
+<tr>
+<td>01_extrair_landing</td>
+<td>conferir snapshot e extrair todas as tabelas do escopo</td>
+<td>CSVs e manifesto na Landing</td>
+</tr>
+<tr>
+<td>02_landing_bronze</td>
+<td>preservar conteúdo textual e registrar ingestão</td>
+<td>cinco tabelas Delta Bronze</td>
+</tr>
+<tr>
+<td>03_bronze_silver</td>
+<td>converter tipos, aplicar regras e separar rejeições</td>
+<td>Silver, quarentenas e auditoria</td>
+</tr>
+<tr>
+<td>04_silver_gold</td>
+<td>relacionar cadastros, datas e eventos</td>
+<td>dimensões e fatos</td>
+</tr>
+<tr>
+<td>05_validar</td>
+<td>reconciliar dados e produzir consultas analíticas</td>
+<td>verificações e resultados</td>
+</tr>
+</tbody>
+</table>
+<h2 id="landing">Landing<a class="headerlink" href="#landing" title="Permanent link">&para;</a></h2>
+<p>O schema landing contém o volume dados, utilizado para arquivos CSV. A organização
+separa arquivos de extração de tabelas analíticas registradas no catálogo. O manifesto
+da Landing contém as contagens extraídas e a identificação do snapshot.</p>
+<h2 id="bronze">Bronze<a class="headerlink" href="#bronze" title="Permanent link">&para;</a></h2>
+<p>As cinco tabelas são gravadas em Delta Lake. As colunas recebidas permanecem textuais,
+preservando os valores da origem antes de conversões. A coluna _ingestao registra o
+momento da carga. As contagens são comparadas com o manifesto.</p>
+<h2 id="silver-e-gold">Silver e Gold<a class="headerlink" href="#silver-e-gold" title="Permanent link">&para;</a></h2>
+<p>A Silver aplica as <a href="../qualidade/">regras de qualidade</a>. Os pais são processados antes
+dos filhos para que as referências sejam verificadas contra registros já válidos.
+A Gold lê os dados válidos e forma o <a href="../modelagem/">modelo dimensional</a>.</p>
+<h2 id="job-sequencial">Job sequencial<a class="headerlink" href="#job-sequencial" title="Permanent link">&para;</a></h2>
+<pre class="mermaid"><code>flowchart LR
+    A["extrair"] --&gt; B["bronze"]
+    B --&gt; C["silver"]
+    C --&gt; D["gold"]
+    D --&gt; E["validar"]</code></pre>
+<p>Cada tarefa depende do sucesso da anterior. O notebook 00 é preparação inicial e
+não faz parte dessa cadeia. O Job possui uma execução simultânea, e todas as tarefas
+utilizam o mesmo catálogo, mantendo as camadas no mesmo contexto.</p>
+<h2 id="carga-e-consistencia">Carga e consistência<a class="headerlink" href="#carga-e-consistencia" title="Permanent link">&para;</a></h2>
+<p>A estratégia é carga completa por snapshot. As tabelas são substituídas a cada carga;
+não há CDC nem processamento incremental. Sobre uma origem estável, os totais de
+eventos e os valores analíticos devem se conservar entre execuções. Timestamps de
+ingestão e versões Delta podem mudar.</p>
+<p>As transações Delta protegem cada escrita de tabela. Não existe uma transação única
+para todo o Job: falhas podem deixar camadas parcialmente atualizadas. A cadeia de
+dependências evita que uma tarefa posterior avance após falha da anterior.</p>
 
 
 
@@ -795,7 +804,7 @@ as duas fatos por aluno antes de somar receitas, pois as visitas poderiam multip
       <nav class="md-footer__inner md-grid" aria-label="Rodapé" >
         
           
-          <a href=".." class="md-footer__link md-footer__link--prev" aria-label="Anterior: Contexto e arquitetura">
+          <a href="../dados/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Cenário e dados">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -805,20 +814,20 @@ as duas fatos por aluno antes de somar receitas, pois as visitas poderiam multip
                 Anterior
               </span>
               <div class="md-ellipsis">
-                Contexto e arquitetura
+                Cenário e dados
               </div>
             </div>
           </a>
         
         
           
-          <a href="../modelagem/" class="md-footer__link md-footer__link--next" aria-label="Próximo: Qualidade e modelo dimensional">
+          <a href="../qualidade/" class="md-footer__link md-footer__link--next" aria-label="Próximo: Qualidade dos dados">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Próximo
               </span>
               <div class="md-ellipsis">
-                Qualidade e modelo dimensional
+                Qualidade dos dados
               </div>
             </div>
             <div class="md-footer__button md-icon">

@@ -12,13 +12,13 @@
         <meta name="author" content="Kamily Hilário das Luzes, Kauã Lucas Alves Barbosa">
       
       
-        <link rel="canonical" href="https://02kamk.github.io/lakehouse-databricks-medalhao/apresentacao/">
+        <link rel="canonical" href="https://02kamk.github.io/lakehouse-databricks-medalhao/qualidade/">
       
       
-        <link rel="prev" href="../testes/">
+        <link rel="prev" href="../pipeline/">
       
       
-        <link rel="next" href="../referencias/">
+        <link rel="next" href="../modelagem/">
       
       
         
@@ -29,7 +29,7 @@
     
     
       
-        <title>Roteiro e perguntas - Lakehouse com Databricks e arquitetura Medalhão</title>
+        <title>Qualidade dos dados - Lakehouse com Databricks e arquitetura Medalhão</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#roteiro-de-apresentacao-e-perguntas" class="md-skip">
+        <a href="#qualidade-dos-dados" class="md-skip">
           Pular para conteúdo
         </a>
       
@@ -116,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Roteiro e perguntas
+              Qualidade dos dados
             
           </span>
         </div>
@@ -269,7 +269,7 @@
   <span class="md-ellipsis">
     
   
-    Contexto e arquitetura
+    Visão geral
   
 
     
@@ -289,14 +289,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../conceitos/" class="md-nav__link">
+      <a href="../dados/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Fundamentos do trabalho
+    Cenário e dados
   
 
     
@@ -316,41 +316,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../modelagem/" class="md-nav__link">
+      <a href="../pipeline/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Qualidade e modelo dimensional
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../testes/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Validações e resultados
+    Pipeline e orquestração
   
 
     
@@ -386,7 +359,7 @@
   <span class="md-ellipsis">
     
   
-    Roteiro e perguntas
+    Qualidade dos dados
   
 
     
@@ -404,7 +377,7 @@
   <span class="md-ellipsis">
     
   
-    Roteiro e perguntas
+    Qualidade dos dados
   
 
     
@@ -430,10 +403,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#roteiro-de-8-a-10-minutos" class="md-nav__link">
+  <a href="#objetivo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Roteiro de 8 a 10 minutos
+        Objetivo
       
     </span>
   </a>
@@ -441,10 +414,54 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#perguntas-provaveis" class="md-nav__link">
+  <a href="#padronizacao-e-tipos" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Perguntas prováveis
+        Padronização e tipos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#regras-por-tabela" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Regras por tabela
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#duplicidade-e-referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Duplicidade e referências
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quarentena-e-auditoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quarentena e auditoria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#barreira-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Barreira final
       
     </span>
   </a>
@@ -455,6 +472,60 @@
   
 </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../modelagem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Modelo dimensional
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../testes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validações e resultados
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -513,10 +584,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#roteiro-de-8-a-10-minutos" class="md-nav__link">
+  <a href="#objetivo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Roteiro de 8 a 10 minutos
+        Objetivo
       
     </span>
   </a>
@@ -524,10 +595,54 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#perguntas-provaveis" class="md-nav__link">
+  <a href="#padronizacao-e-tipos" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Perguntas prováveis
+        Padronização e tipos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#regras-por-tabela" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Regras por tabela
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#duplicidade-e-referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Duplicidade e referências
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quarentena-e-auditoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quarentena e auditoria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#barreira-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Barreira final
       
     </span>
   </a>
@@ -554,35 +669,96 @@
   
 
 
-<h1 id="roteiro-de-apresentacao-e-perguntas">Roteiro de apresentação e perguntas<a class="headerlink" href="#roteiro-de-apresentacao-e-perguntas" title="Permanent link">&para;</a></h1>
-<h2 id="roteiro-de-8-a-10-minutos">Roteiro de 8 a 10 minutos<a class="headerlink" href="#roteiro-de-8-a-10-minutos" title="Permanent link">&para;</a></h2>
-<ol>
-<li>Contexto (1 min): "Nos trabalhos anteriores usamos academia, Spark e formatos de tabela. Agora implementamos uma arquitetura Medalhão no Databricks Free Edition. O serviço gerencia o processamento e o Ubuntu prepara a origem."</li>
-<li>Origem e Landing (1 min): mostrar .tables, manifesto e CSV. "SQLite é o banco relacional escolhido; extraímos todas as cinco tabelas. O Job copia o snapshot para temporário e consulta cada tabela. Landing preserva CSV em um volume."</li>
-<li>Bronze (1 min): mostrar Delta e _ingestao. "Bronze mantém conteúdo textual da origem. Delta adiciona transações e metadados sobre os arquivos de dados."</li>
-<li>Silver (2 min): mostrar regras e auditoria. "Convertemos tipos com try_cast, validamos PK/FK e domínios. Rejeições ficam em quarentena com o registro original. bronze=silver+rejeitados comprova que não descartamos linhas sem registro."</li>
-<li>Gold (2 min): explicar grão, dimensões, medidas e papéis de data. "Visita e pagamento são eventos diferentes; por isso há duas fatos. Somamos valor_recebido, não todas as cobranças. O plano representa a situação atual, pois não temos histórico."</li>
-<li>Job e testes (1-2 min): mostrar dependências e execução real. "Cada tarefa só inicia após sucesso da anterior. A validação final interrompe a entrega caso apareçam inconsistências. Reexecutamos o mesmo snapshot e comparamos totais."</li>
-</ol>
-<p>Use essas falas como guia de entendimento. Só diga "executamos", "passou" ou "publicamos" quando tiver feito a etapa e coletado evidência real.</p>
-<h2 id="perguntas-provaveis">Perguntas prováveis<a class="headerlink" href="#perguntas-provaveis" title="Permanent link">&para;</a></h2>
-<p><strong>Por que SQLite?</strong> O PDF permite escolher o banco. Reutilizamos o modelo e o gerador do trabalho 2, com banco relacional simples e FKs verificadas. SQL Server não é usado nesta implementação.</p>
-<p><strong>Isso ainda complementa os anteriores?</strong> Sim: preserva cenário, dados e Delta; acrescenta plataforma gerenciada, qualidade, dimensão e Job. A mudança de origem está declarada.</p>
-<p><strong>Por que upload do banco?</strong> O workspace remoto não acessa localhost do WSL. Enviamos um snapshot consistente. A extração de todas as tabelas ocorre na tarefa 01; não afirmamos conexão ao banco local em tempo real.</p>
-<p><strong>O que é PaaS?</strong> Usamos uma plataforma gerenciada para notebooks, armazenamento governado e orquestração. Não administramos a instalação do Spark nos servidores.</p>
-<p><strong>Schema e volume são a mesma coisa?</strong> Não. Schema organiza tabelas e volumes; o volume dados dentro de landing guarda os CSVs.</p>
-<p><strong>Por que Delta na Bronze?</strong> É um formato de tabela com log transacional, suporte a operações consistentes e evolução/histórico; Parquet sozinho não fornece esse gerenciamento.</p>
-<p><strong>Qual é o grão?</strong> Um check-in em fato_checkin e um pagamento em fato_pagamento. Dimensões descrevem esses eventos.</p>
-<p><strong>Por que não uma tabela única?</strong> Misturar visitas e pagamentos multiplica linhas e pode inflar receitas. Grãos separados evitam esse erro.</p>
-<p><strong>Como tratam duplicadas?</strong> Rejeitamos todas as linhas com PK repetida para evitar escolher um registro conflitante sem critério de negócio.</p>
-<p><strong>Há SCD2?</strong> Não. Dimensões tipo 1 são reconstruídas. Para histórico contratual seria preciso acrescentar vigência, chave substituta por versão e ligação temporal dos fatos.</p>
-<p><strong>As chaves são substitutas independentes?</strong> Aqui são técnicas derivadas dos IDs da origem única; é uma simplificação. Múltiplas origens exigiriam mapeamento independente para evitar colisões.</p>
-<p><strong>Como provam que nada se perdeu?</strong> Reconciliação de contagens em cada camada, quarentena, unicidade, FKs e conservação dos valores financeiros e visitas.</p>
-<p><strong>O Job é incremental?</strong> Não. É carga completa por snapshot e overwrite, adequada ao pequeno conjunto acadêmico. Uma evolução seria CDC/MERGE, controle de lotes e dimensões históricas.</p>
-<p><strong>ACID garante o pipeline inteiro?</strong> Não. Cada escrita Delta é transacional; não há transação única para todas as tabelas. Falha parcial requer corrigir e reexecutar.</p>
-<p><strong>Qual a diferença entre competência e pagamento?</strong> Competência identifica o mês da cobrança. Data de pagamento identifica quando houve recebimento e pode estar ausente. A consulta de receita do notebook agrupa por competência, não por fluxo de caixa do dia pago.</p>
-<p><strong>Jobs &amp; Pipelines exige Delta Live Tables?</strong> O enunciado pede notebooks encadeados por Job. Esta solução usa Job com dependências, sem afirmar que implementa um pipeline declarativo Lakeflow.</p>
-<p><strong>O que falta validar?</strong> Antes de concluir a execução remota: permissões, compatibilidade serverless, Job, consultas e reexecução. Depois, responder com os Run IDs e resultados reais coletados.</p>
+<h1 id="qualidade-dos-dados">Qualidade dos dados<a class="headerlink" href="#qualidade-dos-dados" title="Permanent link">&para;</a></h1>
+<h2 id="objetivo">Objetivo<a class="headerlink" href="#objetivo" title="Permanent link">&para;</a></h2>
+<p>A Silver separa dados válidos de registros que violam o contrato da base.
+O processamento mantém uma trilha das rejeições para que a qualidade seja mensurável.</p>
+<h2 id="padronizacao-e-tipos">Padronização e tipos<a class="headerlink" href="#padronizacao-e-tipos" title="Permanent link">&para;</a></h2>
+<p>Espaços nas extremidades são removidos e textos vazios tornam-se nulos. Emails são
+normalizados para minúsculas; status e formas de pagamento para maiúsculas.</p>
+<table>
+<thead>
+<tr>
+<th>Informação</th>
+<th>Tipo na Silver</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Identificadores</td>
+<td>inteiro</td>
+</tr>
+<tr>
+<td>Valores financeiros</td>
+<td>decimal(12,2)</td>
+</tr>
+<tr>
+<td>Datas de cadastro e pagamento</td>
+<td>date</td>
+</tr>
+<tr>
+<td>Data e hora de visita</td>
+<td>timestamp</td>
+</tr>
+<tr>
+<td>Situação de atividade</td>
+<td>boolean</td>
+</tr>
+</tbody>
+</table>
+<p>As conversões usam try_cast. Um valor incompatível torna-se nulo e é avaliado pelas
+regras de obrigatoriedade e domínio, em vez de interromper a leitura inteira.</p>
+<h2 id="regras-por-tabela">Regras por tabela<a class="headerlink" href="#regras-por-tabela" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Tabela</th>
+<th>Regras principais</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>planos</td>
+<td>ID positivo e único, nome preenchido, valor e duração positivos</td>
+</tr>
+<tr>
+<td>unidades</td>
+<td>ID positivo e único, nome e cidade preenchidos, inauguração válida</td>
+</tr>
+<tr>
+<td>alunos</td>
+<td>ID positivo e único, nome e email válidos, matrícula e atividade válidas, plano existente</td>
+</tr>
+<tr>
+<td>checkins</td>
+<td>ID positivo e único, data/hora válida, aluno e unidade existentes</td>
+</tr>
+<tr>
+<td>pagamentos</td>
+<td>ID positivo e único, competência no primeiro dia do mês, valor positivo, aluno existente e domínios permitidos</td>
+</tr>
+</tbody>
+</table>
+<p>Em pagamentos, PAGO requer data de pagamento válida. PENDENTE e ATRASADO requerem
+ausência dessa data. As formas permitidas são PIX, CARTAO e BOLETO.</p>
+<h2 id="duplicidade-e-referencias">Duplicidade e referências<a class="headerlink" href="#duplicidade-e-referencias" title="Permanent link">&para;</a></h2>
+<p>Todas as ocorrências de uma chave primária duplicada são rejeitadas. A regra evita
+escolher arbitrariamente entre registros conflitantes. A verificação de email é
+sintática básica; não comprova que o endereço existe.</p>
+<p>Referências são verificadas contra os pais válidos. Um aluno rejeitado pode provocar
+a rejeição de seus pagamentos e visitas por ausência de referência válida.</p>
+<h2 id="quarentena-e-auditoria">Quarentena e auditoria<a class="headerlink" href="#quarentena-e-auditoria" title="Permanent link">&para;</a></h2>
+<p>Cada tabela tem uma quarentena correspondente na Silver. Ela conserva o registro
+original em JSON e um motivo geral de rejeição. A tabela auditoria_qualidade registra
+as contagens da Bronze, da Silver e das rejeições.</p>
+<p><strong>bronze = silver + rejeitados</strong></p>
+<p>Essa igualdade garante a reconciliação das linhas processadas. O motivo armazenado
+é geral; detalhar cada regra violada é uma possibilidade de evolução.</p>
+<h2 id="barreira-final">Barreira final<a class="headerlink" href="#barreira-final" title="Permanent link">&para;</a></h2>
+<p>A carga original teve zero rejeições, conforme confirmação do grupo. O notebook de
+validação exige esse resultado para a base de referência. Em uma carga com rejeições,
+a quarentena e a auditoria são gravadas, mas a validação final falha, sinalizando
+necessidade de análise antes de aceitar os resultados.</p>
 
 
 
@@ -620,7 +796,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Rodapé" >
         
           
-          <a href="../testes/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Validações e resultados">
+          <a href="../pipeline/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Pipeline e orquestração">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -630,20 +806,20 @@
                 Anterior
               </span>
               <div class="md-ellipsis">
-                Validações e resultados
+                Pipeline e orquestração
               </div>
             </div>
           </a>
         
         
           
-          <a href="../referencias/" class="md-footer__link md-footer__link--next" aria-label="Próximo: Referências">
+          <a href="../modelagem/" class="md-footer__link md-footer__link--next" aria-label="Próximo: Modelo dimensional">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Próximo
               </span>
               <div class="md-ellipsis">
-                Referências
+                Modelo dimensional
               </div>
             </div>
             <div class="md-footer__button md-icon">
