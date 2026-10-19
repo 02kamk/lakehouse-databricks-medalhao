@@ -1,6 +1,6 @@
 # Trabalho 3 - Lakehouse da academia
 
-Kamily Hilário das Luzes e Kauã Lucas Alves Barbosa (nomes recuperados dos trabalhos anteriores; conferir antes de entregar).
+**Integrantes:** Kamily Hilário das Luzes · Kauã Lucas Alves Barbosa
 
 Implementação acadêmica para Ubuntu no WSL2 e Databricks Free Edition. Entrega indicada no enunciado: 21/10. Este material foi preparado em 19/10/2026.
 
@@ -20,12 +20,33 @@ O material de aula citado no PDF não foi fornecido; o código aqui foi desenvol
 
 ## Arquitetura
 
-Ubuntu: gerador do trabalho 2 -> CSVs de carga -> banco relacional SQLite -> upload do snapshot em origem.arquivos.
+O Ubuntu prepara a origem com o gerador do trabalho 2. Os CSVs populam o SQLite; um snapshot do banco e seu manifesto são enviados ao volume origem.arquivos.
 
-Databricks Job: SQLite -> landing.dados/*.csv -> bronze (Delta) -> silver (Delta + quarentena) -> gold (dimensões + fatos) -> validação.
+```mermaid
+flowchart LR
+    A["Origem: SQLite"] --> B["Landing: CSV"]
+    B --> C["Bronze: Delta Lake"]
+    C --> D["Silver: tipos e qualidade"]
+    D --> E["Gold: dimensões e fatos"]
+    D --> Q["Quarentena e auditoria"]
+    E --> V["Validações e análises"]
+```
+
+## Orquestração
+
+```mermaid
+flowchart LR
+    A["extrair: 01"] --> B["bronze: 02"]
+    B --> C["silver: 03"]
+    C --> D["gold: 04"]
+    D --> E["validar: 05"]
+```
+
+Todas as tarefas usam compute Serverless e o mesmo parâmetro catalogo.
+Cada tarefa prossegue após sucesso da anterior. O notebook 00 prepara o ambiente antes do Job.
 
 Landing/dados é interpretado como schema landing e volume dados. Um schema registra objetos; um volume armazena arquivos CSV. Caminho: /Volumes/CATALOGO/landing/dados. Não se cria uma tabela Delta na Landing para fingir que ela é CSV.
 
 ## Estado da entrega
 
-Código e documentação preparados localmente. O relatório de testes locais registra somente verificações realmente executadas. A criação da conta, upload, permissões, execução serverless, Job e publicação no novo GitHub precisam ser concluídos com a conta do estudante. O teste local não comprova compatibilidade de execução no Databricks.
+Os testes locais da origem e sintaxe passaram. Durante a execução guiada, o grupo confirmou upload, execução dos notebooks, zero rejeições na Silver e sucesso do Job completo. Uma captura mostrou as cinco tarefas em sucesso; a reexecução também foi confirmada pelo estudante. A publicação do novo repositório e do site deve ser conferida após executar os comandos de Git e MkDocs. Testes locais, execução remota e publicação são verificações distintas.

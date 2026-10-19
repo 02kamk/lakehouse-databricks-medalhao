@@ -1,13 +1,74 @@
-site_name: Lakehouse da Academia
+site_name: Lakehouse com Databricks e arquitetura Medalhão
+site_description: Trabalho 3 de Engenharia de Dados - Landing, Bronze, Silver e Gold com Databricks Free Edition
+site_author: Kamily Hilário das Luzes, Kauã Lucas Alves Barbosa
+site_url: https://02kamk.github.io/lakehouse-databricks-medalhao/
+repo_url: https://github.com/02kamk/lakehouse-databricks-medalhao
+repo_name: lakehouse-databricks-medalhao
+edit_uri: edit/main/docs/
+
+nav:
+  - Contexto e arquitetura: index.md
+  - Instalação no Ubuntu e Databricks: instalacao.md
+  - Execução e Job sequencial: execucao.md
+  - Qualidade e modelo dimensional: modelagem.md
+  - Testes e apresentação: testes.md
+  - Roteiro e perguntas: apresentacao.md
+  - GitHub e MkDocs: github.md
+  - Referências: referencias.md
+
 theme:
   name: material
-  language: pt
-nav:
-  - "Início": index.md
-  - "Instalação": instalacao.md
-  - "Execução e Job": execucao.md
-  - "Qualidade e modelagem": modelagem.md
-  - "Testes": testes.md
-  - "Apresentação": apresentacao.md
-  - "GitHub e MkDocs": github.md
-  - "Referências": referencias.md
+  language: pt-BR
+  icon:
+    repo: fontawesome/brands/github
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: deep orange
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: Mudar para modo escuro
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: deep orange
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Mudar para modo claro
+  features:
+    - navigation.instant
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - toc.follow
+    - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
+    - search.highlight
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/02kamk/lakehouse-databricks-medalhao
+
