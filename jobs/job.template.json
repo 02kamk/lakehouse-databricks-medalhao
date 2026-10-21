@@ -1,79 +1,86 @@
 {
   "name": "academia-medalhao",
   "max_concurrent_runs": 1,
+  "parameters": [
+    {
+      "name": "catalogo",
+      "default": "workspace"
+    },
+    {
+      "name": "jdbc_host",
+      "default": ""
+    },
+    {
+      "name": "jdbc_database",
+      "default": "academia_lakehouse"
+    },
+    {
+      "name": "jdbc_user",
+      "default": ""
+    },
+    {
+      "name": "jdbc_password",
+      "default": ""
+    }
+  ],
   "tasks": [
     {
-      "task_key": "01_extrair_landing",
+      "task_key": "extrair",
       "notebook_task": {
-        "notebook_path": "/Workspace/Users/SEU_EMAIL/lakehouse-academia/notebooks/01_extrair_landing",
-        "base_parameters": {
-          "catalogo": "workspace"
-        }
+        "notebook_path": "/Workspace/Users/SEU_EMAIL/lakehouse-academia/notebooks/01_extrair_landing"
       },
       "timeout_seconds": 1800,
       "max_retries": 0
     },
     {
-      "task_key": "02_landing_bronze",
+      "task_key": "bronze",
       "notebook_task": {
-        "notebook_path": "/Workspace/Users/SEU_EMAIL/lakehouse-academia/notebooks/02_landing_bronze",
-        "base_parameters": {
-          "catalogo": "workspace"
-        }
+        "notebook_path": "/Workspace/Users/SEU_EMAIL/lakehouse-academia/notebooks/02_landing_bronze"
       },
       "timeout_seconds": 1800,
       "max_retries": 0,
       "depends_on": [
         {
-          "task_key": "01_extrair_landing"
+          "task_key": "extrair"
         }
       ]
     },
     {
-      "task_key": "03_bronze_silver",
+      "task_key": "silver",
       "notebook_task": {
-        "notebook_path": "/Workspace/Users/SEU_EMAIL/lakehouse-academia/notebooks/03_bronze_silver",
-        "base_parameters": {
-          "catalogo": "workspace"
-        }
+        "notebook_path": "/Workspace/Users/SEU_EMAIL/lakehouse-academia/notebooks/03_bronze_silver"
       },
       "timeout_seconds": 1800,
       "max_retries": 0,
       "depends_on": [
         {
-          "task_key": "02_landing_bronze"
+          "task_key": "bronze"
         }
       ]
     },
     {
-      "task_key": "04_silver_gold",
+      "task_key": "gold",
       "notebook_task": {
-        "notebook_path": "/Workspace/Users/SEU_EMAIL/lakehouse-academia/notebooks/04_silver_gold",
-        "base_parameters": {
-          "catalogo": "workspace"
-        }
+        "notebook_path": "/Workspace/Users/SEU_EMAIL/lakehouse-academia/notebooks/04_silver_gold"
       },
       "timeout_seconds": 1800,
       "max_retries": 0,
       "depends_on": [
         {
-          "task_key": "03_bronze_silver"
+          "task_key": "silver"
         }
       ]
     },
     {
-      "task_key": "05_validar",
+      "task_key": "validar",
       "notebook_task": {
-        "notebook_path": "/Workspace/Users/SEU_EMAIL/lakehouse-academia/notebooks/05_validar",
-        "base_parameters": {
-          "catalogo": "workspace"
-        }
+        "notebook_path": "/Workspace/Users/SEU_EMAIL/lakehouse-academia/notebooks/05_validar"
       },
       "timeout_seconds": 1800,
       "max_retries": 0,
       "depends_on": [
         {
-          "task_key": "04_silver_gold"
+          "task_key": "gold"
         }
       ]
     }

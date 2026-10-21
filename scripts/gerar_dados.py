@@ -7,7 +7,7 @@ Trabalho 1 possam ser reproduzidos sobre as tabelas Delta do bucket bronze.
 A geração é determinística (semente fixa): rodar de novo produz exatamente os mesmos arquivos.
 
 Uso (na raiz do projeto):
-    uv run python scripts/gerar_dados.py
+    python scripts/gerar_dados.py
 """
 
 import csv
@@ -141,3 +141,26 @@ for (id_aluno, _n, _e, _c, id_plano, mat, ativo) in alunos:
 salvar("pagamentos", ["id_pagamento", "id_aluno", "competencia", "data_pagamento", "valor",
                       "forma_pagamento", "status"], pagamentos)
 
+
+
+# Casos de demonstração adicionados APÓS a geração original: preserva sua semente.
+def acrescentar(tabela, novas):
+    with (DATA_DIR/f"{tabela}.csv").open("a",encoding="utf-8",newline="") as f:
+        csv.writer(f).writerows(novas)
+
+acrescentar("alunos", [
+    (301,"  João   da SILVA  ","  JOAO.SILVA@EMAIL.COM  ","  Criciúma  "," 1 ","2024-06-01","sim"),
+    (302,"   ","email-sem-arroba","Criciúma",1,"2024-06-01","true"),
+    (303,"Maria Teste","maria.teste@email.com","Içara",999,"2024-06-01","true"),
+])
+acrescentar("checkins", [
+    (7685,301,1,"2024-08-20 07:00:00"),
+    (7686,302,1,"2024-08-20 08:00:00"),
+])
+acrescentar("pagamentos", [
+    (2157,301,"2024-08-01","2024-08-05","99.90"," pix "," pago "),
+    (2158,1,"2024-08-01","2024-08-05","-10.00","PIX","PAGO"),
+    (2159,302,"2024-08-01","2024-08-05","99.90","PIX","PAGO"),
+    (2160,303,"2024-08-01","","99.90","PIX","DESCONHECIDO"),
+])
+print("BASE FINAL PARA AZURE: planos=4 unidades=4 alunos=303 checkins=7686 pagamentos=2160")

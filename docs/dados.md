@@ -1,63 +1,47 @@
-# Cenário e dados de origem
+# Cenário e dados
 
-## Academia
+O cenário é uma academia com planos, alunos, unidades, check-ins e pagamentos.
+A origem externa é um banco Azure SQL Database dedicado com cinco tabelas no schema dbo.
+O gerador dos trabalhos anteriores foi preservado e recebeu casos adicionais de qualidade.
 
-O cenário representa uma academia com alunos vinculados a planos, unidades de
-atendimento, registros de entrada e cobranças. Os dados são fictícios e foram gerados
-com semente fixa pelo script herdado do trabalho 2.
-
-## Entidades
-
-| Tabela | Chave primária | Relacionamentos | Base original |
-|---|---|---|---:|
-| planos | id_plano | referenciada por alunos | 4 |
-| unidades | id_unidade | referenciada por checkins | 4 |
-| alunos | id_aluno | id_plano referencia planos | 300 |
-| checkins | id_checkin | id_aluno e id_unidade referenciam seus cadastros | 7.684 |
-| pagamentos | id_pagamento | id_aluno referencia alunos | 2.156 |
+| Tabela | Chave primária | Linhas na origem |
+|---|---|---:|
+| planos | id_plano | 4 |
+| unidades | id_unidade | 4 |
+| alunos | id_aluno | 303 |
+| checkins | id_checkin | 7.686 |
+| pagamentos | id_pagamento | 2.160 |
 
 ```mermaid
 erDiagram
-    PLANOS ||--o{ ALUNOS : possui
-    ALUNOS ||--o{ CHECKINS : realiza
+    PLANOS ||--o{ ALUNOS : plano_atual
+    ALUNOS ||--o{ CHECKINS : visitas
     UNIDADES ||--o{ CHECKINS : recebe
-    ALUNOS ||--o{ PAGAMENTOS : possui
+    ALUNOS ||--o{ PAGAMENTOS : cobrancas
 ```
 
-## Significado dos dados
+As tabelas possuem PK física. Campos de negócio são armazenados como texto na origem
+de demonstração para preservar espaços, domínios inconsistentes e entradas inválidas.
+Os relacionamentos são lógicos: não há FK física bloqueando os casos de órfãos
+incluídos intencionalmente. Essas referências são verificadas na Silver.
 
-**Planos:** nome, valor de referência e duração em meses. O nome valor_mensal é herdado
-da origem; o gerador divide esse valor pela duração para definir a cobrança mensal.
-A medida financeira utilizada nas análises vem de pagamentos.valor.
+## Casos adicionados
 
-**Unidades:** nome, cidade, bairro e data de inauguração. Cada check-in aponta para
-uma unidade, permitindo comparar a frequência de utilização.
+| Registro | Situação |
+|---|---|
+| aluno 301, João | espaços e capitalização inconsistentes, email em maiúsculas e ativo=sim; recuperável |
+| aluno 302 | nome vazio e email inválido; rejeitado |
+| aluno 303 | plano 999 inexistente; rejeitado |
+| check-in 7685 | visita de João; válido |
+| check-in 7686 | aluno 302 rejeitado; referência inválida na Silver |
+| pagamento 2157 | cobrança paga de João com status/forma em minúsculas; recuperável |
+| pagamento 2158 | valor negativo |
+| pagamento 2159 | referência ao aluno 302 |
+| pagamento 2160 | referência ao aluno 303 e status fora do domínio |
 
-**Alunos:** nome, email, cidade, plano atual, data de matrícula e situação de atividade.
-Não existe histórico de mudanças de plano na origem.
+O campo valor_mensal de planos é herdado do trabalho 2. O gerador divide seu valor
+pela duração para formar a cobrança mensal. As análises financeiras usam pagamentos.valor.
+Não há histórico contratual; o plano associado ao aluno é o plano atual.
 
-**Check-ins:** eventos de visita, com aluno, unidade e data/hora. Cada ID identifica
-um evento; várias visitas do mesmo aluno são eventos diferentes.
-
-**Pagamentos:** cobrança identificada por aluno e competência, com valor, forma,
-status e eventual data de pagamento. Os status previstos são PAGO, PENDENTE e ATRASADO.
-
-## Snapshot e rastreabilidade
-
-Os CSVs gerados localmente populam o banco relacional. O arquivo academia.db é o
-snapshot utilizado pela extração. O manifesto de origem registra contagens e SHA-256
-do arquivo, permitindo conferir se banco e manifesto correspondem.
-
-A extração executada no Databricks consulta as tabelas do SQLite e produz novos CSVs
-na Landing. Assim, a fonte do pipeline é o banco, e não apenas uma cópia dos CSVs de carga.
-
-O escopo contém exatamente as cinco tabelas acadêmicas. Se a estrutura do banco
-for alterada, a verificação de tabelas da extração sinaliza a diferença, pois as
-transformações posteriores dependem desse contrato.
-
-## Limites da base
-
-Não há dados reais de clientes. O conjunto não contém histórico contratual e não
-permite reconstruir o plano vigente em cada evento passado. Algumas datas herdadas
-do gerador podem apresentar eventos anteriores à matrícula; a implementação não
-afirma validar essa regra temporal.
+Todos os dados são fictícios. Os registros adicionais foram definidos para esta
+implementação; não representam um arquivo de dados fornecido pelo professor.

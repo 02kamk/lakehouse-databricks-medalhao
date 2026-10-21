@@ -1,61 +1,39 @@
-# Validações e resultados
+# Critérios e resultados esperados
 
-## Critérios de validação
+## Reconciliação por tabela
 
-O pipeline compara contagens entre camadas, verifica unicidade das chaves, referências
-entre tabelas e conservação dos valores financeiros. Esses controles indicam se as
-transformações preservaram os eventos da origem sem perda ou multiplicação.
+| Tabela | Origem / Bronze | Silver válida | Quarentena |
+|---|---:|---:|---:|
+| planos | 4 | 4 | 0 |
+| unidades | 4 | 4 | 0 |
+| alunos | 303 | 301 | 2 |
+| checkins | 7.686 | 7.685 | 1 |
+| pagamentos | 2.160 | 2.157 | 3 |
 
-| Controle | Critério |
-|---|---|
-| Landing e Bronze | contagens iguais às da extração |
-| Silver | bronze = silver + rejeitados |
-| Chaves primárias | ausência de IDs duplicados nas tabelas válidas |
-| Chaves estrangeiras | ausência de referências a dimensões inexistentes |
-| Check-ins na Gold | uma linha por check-in e soma de quantidade igual ao total válido |
-| Receita recebida | soma de valor_recebido igual à soma de pagamentos PAGO na Silver |
-| Reexecução | conservação dos totais sobre o mesmo snapshot |
+O resultado offline de referência contém 7.685 visitas válidas e R$ 168.550,74 em
+pagamentos PAGO. Esses valores foram calculados dos CSVs com Decimal no teste local;
+o notebook 05 concluiu com sucesso na execução registrada e seus gráficos estão em [Evidências](evidencias.md). O total financeiro não está rotulado nas barras da captura.
 
-## Base original
+## Verificações implementadas
 
-| Tabela | Quantidade de registros |
-|---|---:|
-| planos | 4 |
-| unidades | 4 |
-| alunos | 300 |
-| checkins | 7.684 |
-| pagamentos | 2.156 |
+- Contagens de todas as cinco tabelas de origem e comparação com Landing/Bronze.
+- Reconciliação bronze = silver + quarentena e contagens exatas do contrato.
+- Unicidade de PK e referências das fatos às dimensões.
+- Conservação de eventos entre Silver e Gold.
+- Soma de valor_recebido igual ao total PAGO da Silver.
+- Soma de quantidade igual aos check-ins válidos.
+- João normalizado e alunos 302/303 ausentes da dimensão válida.
 
-O estudante confirmou zero rejeições nas cinco tabelas da Silver. Assim, na base
-original, as contagens foram preservadas entre Bronze e Silver. Quarentena vazia
-nesse conjunto não elimina a necessidade das regras: elas protegem o processamento
-contra entradas inválidas futuras.
+## Consultas e gráficos
 
-## Execução do Job
+A análise financeira agrega receita recebida por competência da cobrança. A análise
+de frequência agrega visitas por unidade. O notebook 05 apresenta as tabelas e gráficos
+de barras correspondentes, separando os grãos das duas fatos.
 
-Uma captura compartilhada pelo estudante mostrou as tarefas extrair, bronze, silver,
-gold e validar em sucesso. A validação dos notebooks e o teste de reexecução também
-foram confirmados durante o acompanhamento.
+## Estado das verificações
 
-O registro em evidencias/validacao-databricks.md, no repositório, distingue evidências
-visuais e confirmações do estudante. Não houve execução remota independente pelo
-assistente. Os totais numéricos das consultas não foram fornecidos na última confirmação,
-portanto não são apresentados aqui como uma comparação independente.
-
-## Análises disponibilizadas
-
-- **Receita recebida por competência:** considera pagamentos com status PAGO e agrupa
-  pela competência. Representa recebimentos associados ao mês da cobrança, não fluxo
-  de caixa agrupado pela data efetiva de pagamento.
-- **Visitas por unidade:** soma a medida quantidade da fato_checkin, relacionada à
-  dimensão unidade, permitindo comparar a utilização das unidades da academia.
-
-## Limites dos testes
-
-As verificações locais cobrem integridade do SQLite, hash, contagens e sintaxe dos
-notebooks. O build do MkDocs valida a documentação. Essas verificações são distintas
-da execução do Spark e do Job no Databricks.
-
-As regras implementadas encaminham dados inválidos para quarentena. O teste negativo
-com registros deliberadamente inválidos não foi confirmado pelo estudante e não é
-tratado como evidência de teste concluído.
+Os testes offline e a sintaxe dos sete notebooks foram verificados no ambiente de
+preparação. Eles não comprovam conexão de rede, autenticação SQL, permissões do
+workspace ou execução Spark. O grupo forneceu captura de um novo Job em sucesso, Run ID 938325045572911.
+As saídas detalhadas serão incorporadas conforme recebidas. A reexecução da versão Azure
+ainda precisa ser confirmada; as evidências do Job SQLite anterior permanecem distintas.

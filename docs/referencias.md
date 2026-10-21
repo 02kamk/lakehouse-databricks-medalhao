@@ -1,13 +1,15 @@
 # Referências e créditos
 
-- Trabalho 1: https://github.com/02kamk/apachespark
-- Trabalho 2 e gerador reutilizado: https://github.com/02kamk/spark-minio-delta-lake (scripts/gerar_dados.py, consultado em 19/10/2026).
-- Enunciado fornecido pelo estudante: Trabalho 3 - Lakehouse com Databricks e arquitetura Medalhão, páginas 1 a 4.
-- Databricks Free Edition: https://docs.databricks.com/aws/en/getting-started/free-edition
-- Limitações Free Edition: https://docs.databricks.com/aws/en/getting-started/free-edition-limitations
-- Arquivos em volumes: https://docs.databricks.com/aws/en/volumes/volume-files
-- Configurar Jobs: https://docs.databricks.com/aws/en/jobs/configure-job
-- WSL: https://learn.microsoft.com/en-us/windows/wsl/install
-- MkDocs: https://www.mkdocs.org/user-guide/deploying-your-docs/
+- [Trabalho 1](https://github.com/02kamk/apachespark).
+- [Trabalho 2 e gerador de dados reutilizado](https://github.com/02kamk/spark-minio-delta-lake).
+- Enunciado do Trabalho 3 e orientações adicionais fornecidas pelo estudante em 21/10/2026.
+- [Azure SQL Database: oferta gratuita](https://learn.microsoft.com/en-us/azure/azure-sql/database/free-offer?view=azuresql).
+- [Azure SQL: firewall](https://learn.microsoft.com/en-us/azure/azure-sql/database/firewall-configure?view=azuresql).
+- [ODBC Driver 18 no Linux](https://learn.microsoft.com/en-us/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server).
+- [Databricks: conectores Spark](https://docs.databricks.com/aws/en/connect/spark-data-sources).
+- [Databricks: limitações Serverless](https://docs.databricks.com/aws/en/compute/serverless/limitations).
+- [Databricks: limitações Free Edition](https://docs.databricks.com/aws/en/getting-started/free-edition-limitations).
+- [Databricks: parâmetros de Job](https://docs.databricks.com/aws/en/jobs/job-parameters).
 
-Regras, interface e cotas podem mudar. Consulte a interface da sua conta. Dados fictícios: não representam cadastros reais. O campo valor_mensal de planos é herdado do trabalho 2; o gerador divide seu valor por duracao_meses para calcular a cobrança mensal. Portanto não use esse nome isoladamente para inferir o valor da cobrança sem ler o gerador.
+O cenário é acadêmico e os dados são fictícios. Os casos adicionais de João e das
+rejeições foram construídos nesta implementação para a demonstração de qualidade.

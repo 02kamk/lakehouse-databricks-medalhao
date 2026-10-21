@@ -1,4 +1,4 @@
-site_name: Lakehouse com Databricks e arquitetura Medalhão
+site_name: Lakehouse da Academia - Azure SQL e Databricks
 site_description: Trabalho 3 de Engenharia de Dados - Landing, Bronze, Silver e Gold com Databricks Free Edition
 site_author: Kamily Hilário das Luzes, Kauã Lucas Alves Barbosa
 site_url: https://02kamk.github.io/lakehouse-databricks-medalhao/
@@ -13,6 +13,7 @@ nav:
   - Qualidade dos dados: qualidade.md
   - Modelo dimensional: modelagem.md
   - Validações e resultados: testes.md
+  - Evidências: evidencias.md
   - Referências: referencias.md
 
 theme:

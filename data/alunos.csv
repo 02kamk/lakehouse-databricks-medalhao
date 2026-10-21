@@ -299,3 +299,6 @@ id_aluno,nome,email,cidade,id_plano,data_matricula,ativo
 298,Natália Teixeira,natalia.teixeira298@email.com,Içara,1,2024-06-16,False
 299,Gustavo Ribeiro,gustavo.ribeiro299@email.com,Criciúma,1,2023-11-24,True
 300,Letícia Vieira,leticia.vieira300@email.com,Forquilhinha,4,2023-12-12,True
+301,  João   da SILVA  ,  JOAO.SILVA@EMAIL.COM  ,  Criciúma  , 1 ,2024-06-01,sim
+302,   ,email-sem-arroba,Criciúma,1,2024-06-01,true
+303,Maria Teste,maria.teste@email.com,Içara,999,2024-06-01,true

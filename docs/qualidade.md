@@ -1,62 +1,52 @@
 # Qualidade dos dados
 
-## Objetivo
+## Normalização
 
-A Silver separa dados válidos de registros que violam o contrato da base.
-O processamento mantém uma trilha das rejeições para que a qualidade seja mensurável.
+A Silver remove espaços nas extremidades, converte vazios em nulos, padroniza email
+para minúsculas, nome de aluno para capitalização de palavras e status/forma de
+pagamento para maiúsculas. true, false, 1, 0, sim, nao e não são tratados como
+representações de atividade antes da conversão booleana.
 
-## Padronização e tipos
+IDs são convertidos para inteiros; valores financeiros para decimal(12,2); datas e
+timestamps para seus tipos correspondentes. try_cast transforma entradas incompatíveis
+em nulos que são avaliados pelas regras de validade.
 
-Espaços nas extremidades são removidos e textos vazios tornam-se nulos. Emails são
-normalizados para minúsculas; status e formas de pagamento para maiúsculas.
+## Antes e depois de João
 
-| Informação | Tipo na Silver |
-|---|---|
-| Identificadores | inteiro |
-| Valores financeiros | decimal(12,2) |
-| Datas de cadastro e pagamento | date |
-| Data e hora de visita | timestamp |
-| Situação de atividade | boolean |
+| Campo | Bronze | Silver |
+|---|---|---|
+| id_aluno | texto 301 | inteiro 301 |
+| nome | `  João   da SILVA  ` | João Da Silva |
+| email | `  JOAO.SILVA@EMAIL.COM  ` | joao.silva@email.com |
+| cidade | `  Criciúma  ` | Criciúma |
+| id_plano | ` 1 ` | inteiro 1 |
+| ativo | sim | booleano true |
 
-As conversões usam try_cast. Um valor incompatível torna-se nulo e é avaliado pelas
-regras de obrigatoriedade e domínio, em vez de interromper a leitura inteira.
+João permanece na Silver. Correção de formato é distinta de exclusão por violação
+de regra. Seu check-in e pagamento também permanecem nas fatos.
 
-## Regras por tabela
+## Regras
 
 | Tabela | Regras principais |
 |---|---|
-| planos | ID positivo e único, nome preenchido, valor e duração positivos |
-| unidades | ID positivo e único, nome e cidade preenchidos, inauguração válida |
-| alunos | ID positivo e único, nome e email válidos, matrícula e atividade válidas, plano existente |
-| checkins | ID positivo e único, data/hora válida, aluno e unidade existentes |
-| pagamentos | ID positivo e único, competência no primeiro dia do mês, valor positivo, aluno existente e domínios permitidos |
+| planos | ID único e positivo, nome, valor e duração positivos |
+| unidades | ID único e positivo, nome, cidade e data de inauguração |
+| alunos | ID único e positivo, nome, email sintático, matrícula, atividade e plano válido |
+| checkins | ID único e positivo, data/hora, aluno e unidade válidos |
+| pagamentos | ID único e positivo, competência no primeiro dia, valor positivo, domínios e aluno válidos |
 
-Em pagamentos, PAGO requer data de pagamento válida. PENDENTE e ATRASADO requerem
-ausência dessa data. As formas permitidas são PIX, CARTAO e BOLETO.
-
-## Duplicidade e referências
-
-Todas as ocorrências de uma chave primária duplicada são rejeitadas. A regra evita
-escolher arbitrariamente entre registros conflitantes. A verificação de email é
-sintática básica; não comprova que o endereço existe.
-
-Referências são verificadas contra os pais válidos. Um aluno rejeitado pode provocar
-a rejeição de seus pagamentos e visitas por ausência de referência válida.
+Pagamentos PAGO requerem data; PENDENTE e ATRASADO requerem ausência dela.
+Formas permitidas: PIX, CARTAO e BOLETO. Todas as ocorrências de uma PK duplicada
+são rejeitadas. As referências são verificadas contra pais válidos, propagando
+rejeições para filhos órfãos.
 
 ## Quarentena e auditoria
 
-Cada tabela tem uma quarentena correspondente na Silver. Ela conserva o registro
-original em JSON e um motivo geral de rejeição. A tabela auditoria_qualidade registra
-as contagens da Bronze, da Silver e das rejeições.
+As rejeições conservam o registro original em JSON e um motivo. As tabelas
+quarentena_alunos, quarentena_checkins e quarentena_pagamentos terão registros na
+base de demonstração; quarentena vazia não é o objetivo desta versão.
 
 **bronze = silver + rejeitados**
 
-Essa igualdade garante a reconciliação das linhas processadas. O motivo armazenado
-é geral; detalhar cada regra violada é uma possibilidade de evolução.
-
-## Barreira final
-
-A carga original teve zero rejeições, conforme confirmação do grupo. O notebook de
-validação exige esse resultado para a base de referência. Em uma carga com rejeições,
-a quarentena e a auditoria são gravadas, mas a validação final falha, sinalizando
-necessidade de análise antes de aceitar os resultados.
+O notebook 05 aceita somente as quantidades de rejeição previstas no contrato.
+Rejeições adicionais, perdas e multiplicações causam falha na validação.

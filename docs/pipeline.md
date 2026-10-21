@@ -1,41 +1,24 @@
 # Pipeline e orquestração
 
-## Preparação da origem
+## Origem externa
 
-O gerador produz a base acadêmica, e o script de preparação cria as cinco tabelas
-SQLite, verifica as referências e registra o manifesto. O snapshot é disponibilizado
-no volume origem.arquivos. Essa preparação é anterior ao Job.
+O banco no Azure mantém as cinco tabelas mesmo após limpar as saídas do Databricks.
+A extração consulta o inventário de tabelas do banco e confere o contrato das cinco
+tabelas dbo. Não existem cópias SQLite utilizadas pelo novo Job.
 
-## Etapas implementadas
+## Responsabilidades
 
-| Notebook | Responsabilidade | Resultado |
-|---|---|---|
-| 00_configurar | preparação dos objetos de armazenamento | schemas e volumes necessários |
-| 01_extrair_landing | conferir snapshot e extrair todas as tabelas do escopo | CSVs e manifesto na Landing |
-| 02_landing_bronze | preservar conteúdo textual e registrar ingestão | cinco tabelas Delta Bronze |
-| 03_bronze_silver | converter tipos, aplicar regras e separar rejeições | Silver, quarentenas e auditoria |
-| 04_silver_gold | relacionar cadastros, datas e eventos | dimensões e fatos |
-| 05_validar | reconciliar dados e produzir consultas analíticas | verificações e resultados |
+| Notebook | Função |
+|---|---|
+| 00_configurar | preparação dos schemas e do volume Landing |
+| 01_extrair_landing | conexão ao Azure SQL e extração completa para CSV |
+| 02_landing_bronze | leitura da extração e gravação Delta, preservando conteúdo textual |
+| 03_bronze_silver | tipos, normalização, regras, quarentena e auditoria |
+| 04_silver_gold | construção das quatro dimensões e duas fatos |
+| 05_validar | reconciliação, conferência das rejeições previstas e gráficos |
+| 99_limpar | remoção controlada apenas das saídas acadêmicas do Databricks |
 
-## Landing
-
-O schema landing contém o volume dados, utilizado para arquivos CSV. A organização
-separa arquivos de extração de tabelas analíticas registradas no catálogo. O manifesto
-da Landing contém as contagens extraídas e a identificação do snapshot.
-
-## Bronze
-
-As cinco tabelas são gravadas em Delta Lake. As colunas recebidas permanecem textuais,
-preservando os valores da origem antes de conversões. A coluna _ingestao registra o
-momento da carga. As contagens são comparadas com o manifesto.
-
-## Silver e Gold
-
-A Silver aplica as [regras de qualidade](qualidade.md). Os pais são processados antes
-dos filhos para que as referências sejam verificadas contra registros já válidos.
-A Gold lê os dados válidos e forma o [modelo dimensional](modelagem.md).
-
-## Job sequencial
+## Job
 
 ```mermaid
 flowchart LR
@@ -45,17 +28,19 @@ flowchart LR
     D --> E["validar"]
 ```
 
-Cada tarefa depende do sucesso da anterior. O notebook 00 é preparação inicial e
-não faz parte dessa cadeia. O Job possui uma execução simultânea, e todas as tarefas
-utilizam o mesmo catálogo, mantendo as camadas no mesmo contexto.
+As cinco tarefas dependem do sucesso da anterior. A preparação 00 e a limpeza 99
+ficam fora do Job. A concorrência é 1, para evitar colisão entre cargas completas.
 
-## Carga e consistência
+O notebook 01 usa o conector SQLSERVER nativo do Databricks, com parâmetros jdbc_host,
+jdbc_database, jdbc_user e jdbc_password. O tráfego é cifrado e o certificado do
+servidor é validado. Não há uso de Maven ou acesso direto à JVM nos notebooks.
 
-A estratégia é carga completa por snapshot. As tabelas são substituídas a cada carga;
-não há CDC nem processamento incremental. Sobre uma origem estável, os totais de
-eventos e os valores analíticos devem se conservar entre execuções. Timestamps de
-ingestão e versões Delta podem mudar.
+A extração é materializada no volume antes das transformações. Um manifesto registra
+contagens e instante de extração. Durante o ensaio, a origem deve permanecer estável:
+não existe uma transação distribuída cobrindo todas as leituras e escritas.
 
-As transações Delta protegem cada escrita de tabela. Não existe uma transação única
-para todo o Job: falhas podem deixar camadas parcialmente atualizadas. A cadeia de
-dependências evita que uma tarefa posterior avance após falha da anterior.
+## Limpeza e reconstrução
+
+99_limpar utiliza uma lista explícita de tabelas e caminhos do projeto. Não executa
+DROP DATABASE, não apaga o catálogo, não apaga schemas e não acessa o Azure SQL.
+O widget confirmar exige SIM. O Job seguinte reconstrói as camadas a partir do banco externo.

@@ -1,0 +1,46 @@
+{
+  "ambiente": "offline: Python; não é execução no Azure ou Spark",
+  "contagens": [
+    {
+      "tabela": "planos",
+      "origem": 4,
+      "silver_esperada": 4,
+      "rejeitados_esperados": 0
+    },
+    {
+      "tabela": "unidades",
+      "origem": 4,
+      "silver_esperada": 4,
+      "rejeitados_esperados": 0
+    },
+    {
+      "tabela": "alunos",
+      "origem": 303,
+      "silver_esperada": 301,
+      "rejeitados_esperados": 2
+    },
+    {
+      "tabela": "checkins",
+      "origem": 7686,
+      "silver_esperada": 7685,
+      "rejeitados_esperados": 1
+    },
+    {
+      "tabela": "pagamentos",
+      "origem": 2160,
+      "silver_esperada": 2157,
+      "rejeitados_esperados": 3
+    }
+  ],
+  "receita_recebida_esperada": "168550.74",
+  "visitas_esperadas": 7685,
+  "joao": {
+    "id_aluno": "301",
+    "nome": "João Da Silva",
+    "email": "joao.silva@email.com",
+    "cidade": "Criciúma",
+    "id_plano": "1",
+    "data_matricula": "2024-06-01",
+    "ativo": "True"
+  }
+}

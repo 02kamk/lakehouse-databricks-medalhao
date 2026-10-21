@@ -1,0 +1,88 @@
+Data: 21/10/2026. Ambiente de preparação Windows.
+$ python scripts/gerar_dados.py
+unidades         4 linhas
+planos           4 linhas
+alunos         300 linhas
+checkins      7684 linhas
+pagamentos    2156 linhas
+BASE FINAL PARA AZURE: planos=4 unidades=4 alunos=303 checkins=7686 pagamentos=2160
+
+EXIT=0
+
+$ python scripts/testar_local.py
+{
+  "ambiente": "offline: Python; não é execução no Azure ou Spark",
+  "contagens": [
+    {
+      "tabela": "planos",
+      "origem": 4,
+      "silver_esperada": 4,
+      "rejeitados_esperados": 0
+    },
+    {
+      "tabela": "unidades",
+      "origem": 4,
+      "silver_esperada": 4,
+      "rejeitados_esperados": 0
+    },
+    {
+      "tabela": "alunos",
+      "origem": 303,
+      "silver_esperada": 301,
+      "rejeitados_esperados": 2
+    },
+    {
+      "tabela": "checkins",
+      "origem": 7686,
+      "silver_esperada": 7685,
+      "rejeitados_esperados": 1
+    },
+    {
+      "tabela": "pagamentos",
+      "origem": 2160,
+      "silver_esperada": 2157,
+      "rejeitados_esperados": 3
+    }
+  ],
+  "receita_recebida_esperada": "168550.74",
+  "visitas_esperadas": 7685,
+  "joao": {
+    "id_aluno": "301",
+    "nome": "João Da Silva",
+    "email": "joao.silva@email.com",
+    "cidade": "Criciúma",
+    "id_plano": "1",
+    "data_matricula": "2024-06-01",
+    "ativo": "True"
+  }
+}
+PASSOU: CSVs, casos válidos/inválidos, normalização do João, reconciliação e sintaxe dos sete notebooks.
+PENDENTE: conexão Azure SQL e execução real dos notebooks no Databricks.
+
+EXIT=0
+
+$ python -m mkdocs build --strict
+
+ │  ⚠  Warning from the Material for MkDocs team
+ │
+ │  MkDocs 2.0, the underlying framework of Material for MkDocs,
+ │  will introduce backward-incompatible changes, including:
+ │
+ │  × All plugins will stop working – the plugin system has been removed
+ │  × All theme overrides will break – the theming system has been rewritten
+ │  × No migration path exists – existing projects cannot be upgraded
+ │  × Closed contribution model – community members can't report bugs
+ │  × Currently unlicensed – unsuitable for production use
+ │
+ │  Our full analysis:
+ │
+ │  https://squidfunk.github.io/mkdocs-material/blog/2026/02/18/mkdocs-2.0/
+
+INFO    -  Cleaning site directory
+INFO    -  Building documentation to directory: C:\Users\kamil\Documents\Codex\2026-10-19\c\outputs\ajustes-final\site
+INFO    -  Documentation built in 0.70 seconds
+
+EXIT=0
+
+PASSOU: sete notebooks; parâmetros e dependências do Job; escopo da limpeza; TLS; proteção .env; escapamento ODBC.
+NAO EXECUTADO: Azure SQL, Databricks, gráficos remotos e limpeza real.
