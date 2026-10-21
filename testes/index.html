@@ -18,7 +18,7 @@
         <link rel="prev" href="../modelagem/">
       
       
-        <link rel="next" href="../referencias/">
+        <link rel="next" href="../evidencias/">
       
       
         
@@ -29,7 +29,7 @@
     
     
       
-        <title>Validações e resultados - Lakehouse com Databricks e arquitetura Medalhão</title>
+        <title>Validações e resultados - Lakehouse da Academia - Azure SQL e Databricks</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#validacoes-e-resultados" class="md-skip">
+        <a href="#criterios-e-resultados-esperados" class="md-skip">
           Pular para conteúdo
         </a>
       
@@ -96,7 +96,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
-    <a href=".." title="Lakehouse com Databricks e arquitetura Medalhão" class="md-header__button md-logo" aria-label="Lakehouse com Databricks e arquitetura Medalhão" data-md-component="logo">
+    <a href=".." title="Lakehouse da Academia - Azure SQL e Databricks" class="md-header__button md-logo" aria-label="Lakehouse da Academia - Azure SQL e Databricks" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -110,7 +110,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            Lakehouse com Databricks e arquitetura Medalhão
+            Lakehouse da Academia - Azure SQL e Databricks
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -232,13 +232,13 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="Lakehouse com Databricks e arquitetura Medalhão" class="md-nav__button md-logo" aria-label="Lakehouse com Databricks e arquitetura Medalhão" data-md-component="logo">
+    <a href=".." title="Lakehouse da Academia - Azure SQL e Databricks" class="md-nav__button md-logo" aria-label="Lakehouse da Academia - Azure SQL e Databricks" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
 
     </a>
-    Lakehouse com Databricks e arquitetura Medalhão
+    Lakehouse da Academia - Azure SQL e Databricks
   </label>
   
     <div class="md-nav__source">
@@ -457,10 +457,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#criterios-de-validacao" class="md-nav__link">
+  <a href="#reconciliacao-por-tabela" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Critérios de validação
+        Reconciliação por tabela
       
     </span>
   </a>
@@ -468,10 +468,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#base-original" class="md-nav__link">
+  <a href="#verificacoes-implementadas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Base original
+        Verificações implementadas
       
     </span>
   </a>
@@ -479,10 +479,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#execucao-do-job" class="md-nav__link">
+  <a href="#consultas-e-graficos" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Execução do Job
+        Consultas e gráficos
       
     </span>
   </a>
@@ -490,21 +490,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#analises-disponibilizadas" class="md-nav__link">
+  <a href="#estado-das-verificacoes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Análises disponibilizadas
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#limites-dos-testes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Limites dos testes
+        Estado das verificações
       
     </span>
   </a>
@@ -515,6 +504,33 @@
   
 </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../evidencias/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evidências
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -573,10 +589,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#criterios-de-validacao" class="md-nav__link">
+  <a href="#reconciliacao-por-tabela" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Critérios de validação
+        Reconciliação por tabela
       
     </span>
   </a>
@@ -584,10 +600,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#base-original" class="md-nav__link">
+  <a href="#verificacoes-implementadas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Base original
+        Verificações implementadas
       
     </span>
   </a>
@@ -595,10 +611,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#execucao-do-job" class="md-nav__link">
+  <a href="#consultas-e-graficos" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Execução do Job
+        Consultas e gráficos
       
     </span>
   </a>
@@ -606,21 +622,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#analises-disponibilizadas" class="md-nav__link">
+  <a href="#estado-das-verificacoes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Análises disponibilizadas
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#limites-dos-testes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Limites dos testes
+        Estado das verificações
       
     </span>
   </a>
@@ -647,107 +652,73 @@
   
 
 
-<h1 id="validacoes-e-resultados">Validações e resultados<a class="headerlink" href="#validacoes-e-resultados" title="Permanent link">&para;</a></h1>
-<h2 id="criterios-de-validacao">Critérios de validação<a class="headerlink" href="#criterios-de-validacao" title="Permanent link">&para;</a></h2>
-<p>O pipeline compara contagens entre camadas, verifica unicidade das chaves, referências
-entre tabelas e conservação dos valores financeiros. Esses controles indicam se as
-transformações preservaram os eventos da origem sem perda ou multiplicação.</p>
-<table>
-<thead>
-<tr>
-<th>Controle</th>
-<th>Critério</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Landing e Bronze</td>
-<td>contagens iguais às da extração</td>
-</tr>
-<tr>
-<td>Silver</td>
-<td>bronze = silver + rejeitados</td>
-</tr>
-<tr>
-<td>Chaves primárias</td>
-<td>ausência de IDs duplicados nas tabelas válidas</td>
-</tr>
-<tr>
-<td>Chaves estrangeiras</td>
-<td>ausência de referências a dimensões inexistentes</td>
-</tr>
-<tr>
-<td>Check-ins na Gold</td>
-<td>uma linha por check-in e soma de quantidade igual ao total válido</td>
-</tr>
-<tr>
-<td>Receita recebida</td>
-<td>soma de valor_recebido igual à soma de pagamentos PAGO na Silver</td>
-</tr>
-<tr>
-<td>Reexecução</td>
-<td>conservação dos totais sobre o mesmo snapshot</td>
-</tr>
-</tbody>
-</table>
-<h2 id="base-original">Base original<a class="headerlink" href="#base-original" title="Permanent link">&para;</a></h2>
+<h1 id="criterios-e-resultados-esperados">Critérios e resultados esperados<a class="headerlink" href="#criterios-e-resultados-esperados" title="Permanent link">&para;</a></h1>
+<h2 id="reconciliacao-por-tabela">Reconciliação por tabela<a class="headerlink" href="#reconciliacao-por-tabela" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
 <th>Tabela</th>
-<th style="text-align: right;">Quantidade de registros</th>
+<th style="text-align: right;">Origem / Bronze</th>
+<th style="text-align: right;">Silver válida</th>
+<th style="text-align: right;">Quarentena</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>planos</td>
 <td style="text-align: right;">4</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0</td>
 </tr>
 <tr>
 <td>unidades</td>
 <td style="text-align: right;">4</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0</td>
 </tr>
 <tr>
 <td>alunos</td>
-<td style="text-align: right;">300</td>
+<td style="text-align: right;">303</td>
+<td style="text-align: right;">301</td>
+<td style="text-align: right;">2</td>
 </tr>
 <tr>
 <td>checkins</td>
-<td style="text-align: right;">7.684</td>
+<td style="text-align: right;">7.686</td>
+<td style="text-align: right;">7.685</td>
+<td style="text-align: right;">1</td>
 </tr>
 <tr>
 <td>pagamentos</td>
-<td style="text-align: right;">2.156</td>
+<td style="text-align: right;">2.160</td>
+<td style="text-align: right;">2.157</td>
+<td style="text-align: right;">3</td>
 </tr>
 </tbody>
 </table>
-<p>O estudante confirmou zero rejeições nas cinco tabelas da Silver. Assim, na base
-original, as contagens foram preservadas entre Bronze e Silver. Quarentena vazia
-nesse conjunto não elimina a necessidade das regras: elas protegem o processamento
-contra entradas inválidas futuras.</p>
-<h2 id="execucao-do-job">Execução do Job<a class="headerlink" href="#execucao-do-job" title="Permanent link">&para;</a></h2>
-<p>Uma captura compartilhada pelo estudante mostrou as tarefas extrair, bronze, silver,
-gold e validar em sucesso. A validação dos notebooks e o teste de reexecução também
-foram confirmados durante o acompanhamento.</p>
-<p>O registro em evidencias/validacao-databricks.md, no repositório, distingue evidências
-visuais e confirmações do estudante. Não houve execução remota independente pelo
-assistente. Os totais numéricos das consultas não foram fornecidos na última confirmação,
-portanto não são apresentados aqui como uma comparação independente.</p>
-<h2 id="analises-disponibilizadas">Análises disponibilizadas<a class="headerlink" href="#analises-disponibilizadas" title="Permanent link">&para;</a></h2>
+<p>O resultado offline de referência contém 7.685 visitas válidas e R$ 168.550,74 em
+pagamentos PAGO. Esses valores foram calculados dos CSVs com Decimal no teste local;
+o notebook 05 concluiu com sucesso na execução registrada e seus gráficos estão em <a href="../evidencias/">Evidências</a>. O total financeiro não está rotulado nas barras da captura.</p>
+<h2 id="verificacoes-implementadas">Verificações implementadas<a class="headerlink" href="#verificacoes-implementadas" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>Receita recebida por competência:</strong> considera pagamentos com status PAGO e agrupa
-  pela competência. Representa recebimentos associados ao mês da cobrança, não fluxo
-  de caixa agrupado pela data efetiva de pagamento.</li>
-<li><strong>Visitas por unidade:</strong> soma a medida quantidade da fato_checkin, relacionada à
-  dimensão unidade, permitindo comparar a utilização das unidades da academia.</li>
+<li>Contagens de todas as cinco tabelas de origem e comparação com Landing/Bronze.</li>
+<li>Reconciliação bronze = silver + quarentena e contagens exatas do contrato.</li>
+<li>Unicidade de PK e referências das fatos às dimensões.</li>
+<li>Conservação de eventos entre Silver e Gold.</li>
+<li>Soma de valor_recebido igual ao total PAGO da Silver.</li>
+<li>Soma de quantidade igual aos check-ins válidos.</li>
+<li>João normalizado e alunos 302/303 ausentes da dimensão válida.</li>
 </ul>
-<h2 id="limites-dos-testes">Limites dos testes<a class="headerlink" href="#limites-dos-testes" title="Permanent link">&para;</a></h2>
-<p>As verificações locais cobrem integridade do SQLite, hash, contagens e sintaxe dos
-notebooks. O build do MkDocs valida a documentação. Essas verificações são distintas
-da execução do Spark e do Job no Databricks.</p>
-<p>As regras implementadas encaminham dados inválidos para quarentena. O teste negativo
-com registros deliberadamente inválidos não foi confirmado pelo estudante e não é
-tratado como evidência de teste concluído.</p>
+<h2 id="consultas-e-graficos">Consultas e gráficos<a class="headerlink" href="#consultas-e-graficos" title="Permanent link">&para;</a></h2>
+<p>A análise financeira agrega receita recebida por competência da cobrança. A análise
+de frequência agrega visitas por unidade. O notebook 05 apresenta as tabelas e gráficos
+de barras correspondentes, separando os grãos das duas fatos.</p>
+<h2 id="estado-das-verificacoes">Estado das verificações<a class="headerlink" href="#estado-das-verificacoes" title="Permanent link">&para;</a></h2>
+<p>Os testes offline e a sintaxe dos sete notebooks foram verificados no ambiente de
+preparação. Eles não comprovam conexão de rede, autenticação SQL, permissões do
+workspace ou execução Spark. O grupo forneceu captura de um novo Job em sucesso, Run ID 938325045572911.
+As saídas detalhadas serão incorporadas conforme recebidas. A reexecução da versão Azure
+ainda precisa ser confirmada; as evidências do Job SQLite anterior permanecem distintas.</p>
 
 
 
@@ -802,13 +773,13 @@ tratado como evidência de teste concluído.</p>
         
         
           
-          <a href="../referencias/" class="md-footer__link md-footer__link--next" aria-label="Próximo: Referências">
+          <a href="../evidencias/" class="md-footer__link md-footer__link--next" aria-label="Próximo: Evidências">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Próximo
               </span>
               <div class="md-ellipsis">
-                Referências
+                Evidências
               </div>
             </div>
             <div class="md-footer__button md-icon">
